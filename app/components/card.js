@@ -37,10 +37,12 @@ class CardReveal extends React.Component {
 class Card extends React.Component {
     render () {
         return (
-            <div className="card">
-                <CardImage imageURL={this.props.media.imageURL}/>
-                <CardContent title={this.props.media.title} release={this.props.media.release} />
-                <CardReveal title={this.props.media.title} />
+            <div className="col s6 m4 l3">
+                <div className="card">
+                    <CardImage imageURL={this.props.item.imageURL}/>
+                    <CardContent title={this.props.item.title} release={this.props.item.release} />
+                    <CardReveal title={this.props.item.title} />
+                </div>
             </div>
         )
     }

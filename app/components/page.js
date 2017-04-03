@@ -1,12 +1,19 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-import { Card } from './card';
+var Card = require('./card');
 
 
-export class Page extends React.Component {
+class Page extends React.Component {
     render () {
+        var films = this.props.media.map( media => {
+            return <Card item={media} />
+        })
         return (
-
+            <div>
+                {films}
+            </div>
         )
     }
 }
+
+module.exports = Page;

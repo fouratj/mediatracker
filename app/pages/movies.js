@@ -1,7 +1,19 @@
 var React = require('react');
 // import { store } from '../store';
-// import { Card } from '../components/card';
 var Card = require('../components/card');
+var Page = require('../components/page')
+
+var films = [];
+
+for (let x = 0; x < 25; x++) {
+    let film = {
+        imageURL: 'https://image.tmdb.org/t/p/w300/45Y1G5FEgttPAwjTYic6czC9xCn.jpg',
+        title: 'Loganz',
+        release: '2017'
+    };
+    films.push(film);
+}
+console.log(films)
 
 class Row extends React.Component {
     render () {
@@ -13,20 +25,14 @@ class Row extends React.Component {
     }
 }
 
-var film = {
-    imageURL: 'https://image.tmdb.org/t/p/w300/45Y1G5FEgttPAwjTYic6czC9xCn.jpg',
-    title: 'Loganz',
-    release: '2017'
-};
+
  
 class Movies extends React.Component {
     render () {
         return (
             <div className="container">
                 <Row>
-                    <div className="col s4">
-                        <Card media={film}/>
-                    </div>    
+                    <Page media={films}/>
                 </Row>
             </div>
         )
