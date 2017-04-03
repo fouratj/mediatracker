@@ -1,18 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-import { store } from './store';
-
-console.log(store);
-
-class Container extends React.Component {
-    render() {
-        return (
-            <div>Hello Worldsssss</div>
-        )
-    }
-}
+var routes = require('./config/routes');
 
 ReactDOM.render(
-    <Container />,
+    routes,
     document.getElementById('app')
 );
