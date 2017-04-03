@@ -48,5 +48,4 @@ class Card extends React.Component {
     }
 }
 
-
 module.exports = Card;
