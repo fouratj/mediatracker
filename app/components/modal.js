@@ -4,20 +4,13 @@ var store = require('../store');
 
 class AddItem extends React.Component { 
     componentDidMount() {
+        var self = this;
         var $this = $(ReactDOM.findDOMNode(this));
-        //waits for window to paint modal
-        window.requestAnimationFrame(function() {
-            // var node = _this.getDOMNode();
-            $($this[0]).modal();
-            $('.modal').modal();
-        });
+        $($this[0]).modal();
 
         $this[0].addEventListener('submit', function(e) {
             e.preventDefault();
-            //sends user submitted text to redux-state
-            store.dispatch(movies(e.target[0].value));
-            // store.dispatch(cacheTodos())
-
+            store.store.dispatch(self.props.add(e.target[0].value))
             e.target[0].value = "";
             $($this[0]).modal('close');
         });

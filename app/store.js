@@ -15,6 +15,7 @@ const initialState = {
   books: []
 }
 
+// ACTIONS
 function addMovie (film) {
     return { type: ADD_MOVIE, film }
 }
@@ -38,8 +39,11 @@ function addBook (book) {
 function delBook (book) {
     return { type: DEL_BOOK, book }
 }
+// /ACTIONS
 
-function movies (state = initialState, action) {
+
+// REDUCERS
+function movies (state = [], action) {
     console.log(state)
     switch (action.type) {
         case ADD_MOVIE: 
@@ -52,6 +56,7 @@ function movies (state = initialState, action) {
                 }   
             ]
         case DEL_MOVIE:
+            //filter prototype to remove original entry
             return state;
     }
 }
@@ -82,6 +87,7 @@ function mylifeapp (state = initialState, actions) {
         books: books(state.books, actions)
     }
 }
+// /REDUCERS
 
 let store = createStore(mylifeapp);
 
