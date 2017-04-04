@@ -27,8 +27,33 @@ class CardReveal extends React.Component {
     render () {
         return (
             <div className="card-reveal">
-                <span className="card-title grey-text text-darken-4">{this.props.title}<i className="material-icons right">close</i></span>
-                <p>Here is some more information about this product that is only revealed once clicked on.</p>
+                <div className="row">
+                    <div className="col s12">
+                        <span className="card-title grey-text text-darken-4">{this.props.title}<i className="material-icons prefix">close</i></span>
+                    </div>
+                    <div className="col s12">
+                        You've watched it X times.
+                    </div>
+                    <div className="col s12" style={{position: 'fixed', bottom: '0px'}}>
+                        <div className="col s6">
+                            <a className="left">
+                                <i className="material-icons">
+                                    replay
+                                </i>
+                            </a>
+                        </div>
+                        <div className="col s6">
+                            <a className="right">
+                                <i className="material-icons">
+                                    delete
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                
             </div>
         )
     }
