@@ -36,14 +36,14 @@ class CardReveal extends React.Component {
                     </div>
                     <div className="col s12" style={{position: 'fixed', bottom: '0px'}}>
                         <div className="col s6">
-                            <a className="left">
+                            <a href="#" className="left">
                                 <i className="material-icons">
                                     replay
                                 </i>
                             </a>
                         </div>
                         <div className="col s6">
-                            <a className="right">
+                            <a href="#" className="right">
                                 <i className="material-icons">
                                     delete
                                 </i>

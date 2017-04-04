@@ -10,6 +10,7 @@ var Movies = require("../pages/movies");
 var TVShows = require('../pages/tvshows');
 var Books = require('../pages/books');
 var Stats = require('../pages/stats');
+var Modal = require('../components/modal')
 
 var routes = (
     <Router history={hashHistory}>
