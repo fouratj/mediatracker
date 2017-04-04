@@ -6,12 +6,13 @@ var Card = require('../components/card');
 var Page = require('../components/page');
 var FAB = require('../components/fab'); //Fixed Action Button
 var AddItem = require('../components/modal');
+
 // /COMPONENTS
 
 //STORE & REDUX ACTIONS
 var store = require('../store');
 var addMovie = store.addMovie;
-
+var delMovie = store.delMovie;
 
 var films = [];
 
@@ -41,12 +42,12 @@ class Movies extends React.Component {
         return (
             <div>
                 <Row>
-                    <Page media={films}/>
+                    <Page media={films} del={delMovie} />
                 </Row>
                 <Row>
                     <FAB />
                 </Row>
-                <AddItem add={addMovie} />
+                <AddItem add={addMovie}/>
             </div>
         )
     }

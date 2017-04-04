@@ -46,7 +46,8 @@ function delBook (book) {
 function movies (state = [], action) {
     console.log(state)
     switch (action.type) {
-        case ADD_MOVIE: 
+        case ADD_MOVIE:
+            console.log("ADD_MOVIE") 
             return [
                 ...state, 
                 {
@@ -56,8 +57,10 @@ function movies (state = [], action) {
                 }   
             ]
         case DEL_MOVIE:
-            //filter prototype to remove original entry
-            return state;
+            console.log(DEL_MOVIE)
+            return state.filter( item => item.title != action.film)
+        default:
+            return state
     }
 }
 
@@ -96,5 +99,6 @@ module.exports = {
     movies,
     tvshows,
     books,
-    addMovie
+    addMovie,
+    delMovie
 }

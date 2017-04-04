@@ -1,4 +1,5 @@
 var React = require('react');
+var Store = require('../store');
 
 class CardImage extends React.Component {
     render () {
@@ -24,12 +25,21 @@ class CardContent extends React.Component {
 }
 
 class CardReveal extends React.Component {
+    handleDelete (e) {
+        console.log('clicked delete')
+        var self = this;
+        console.log(self)
+        e.preventDefault()
+        Store.store.dispatch(self.props.del(self.props.title));
+        
+    }
+
     render () {
         return (
             <div className="card-reveal">
                 <div className="row">
                     <div className="col s12">
-                        <span className="card-title grey-text text-darken-4">{this.props.title}<i className="material-icons prefix">close</i></span>
+                        <span className="card-title grey-text text-darken-4 valign-wrapper">{this.props.title}<i className="material-icons right valign">close</i></span>
                     </div>
                     <div className="col s12">
                         You've watched it X times.
@@ -43,7 +53,7 @@ class CardReveal extends React.Component {
                             </a>
                         </div>
                         <div className="col s6">
-                            <a href="#" className="right">
+                            <a href="#" className="right" onClick={this.handleDelete.bind(this)}>
                                 <i className="material-icons">
                                     delete
                                 </i>
@@ -66,7 +76,7 @@ class Card extends React.Component {
                 <div className="card">
                     <CardImage imageURL={this.props.item.imageURL}/>
                     <CardContent title={this.props.item.title} release={this.props.item.release} />
-                    <CardReveal title={this.props.item.title} />
+                    <CardReveal title={this.props.item.title} del={this.props.del} />
                 </div>
             </div>
         )
