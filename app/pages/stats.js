@@ -1,13 +1,13 @@
 var React = require('react');
 
-class Books extends React.Component {
+class Stats extends React.Component {
     render () {
         return (
             <div>
-                Books
+                Stats
             </div>
         )
     }
 }
 
-module.exports = Books;
+module.exports = Stats;

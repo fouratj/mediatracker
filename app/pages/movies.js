@@ -13,7 +13,6 @@ for (let x = 0; x < 25; x++) {
     };
     films.push(film);
 }
-console.log(films)
 
 class Row extends React.Component {
     render () {
@@ -24,7 +23,6 @@ class Row extends React.Component {
         )
     }
 }
-
 
  
 class Movies extends React.Component {

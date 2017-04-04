@@ -5,12 +5,12 @@ var Card = require('./card');
 
 class Page extends React.Component {
     render () {
-        var films = this.props.media.map( media => {
-            return <Card item={media} />
+        var items = this.props.media.map( (media, index) => {
+            return <Card key={index} item={media} />
         })
         return (
             <div>
-                {films}
+                {items}
             </div>
         )
     }
