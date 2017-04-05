@@ -16,8 +16,8 @@ class CardContent extends React.Component {
         return (
             <div className="card-content" style={{padding: '0px'}}>
                 <ul className="collection with-header" style={{margin: '0px'}}>
-                    <li className="collection-item active">{this.props.title}</li>
-                    <li className="collection-item">{this.props.release}</li>
+                    <li className="collection-item active center-align">{this.props.title}</li>
+                    <li className="collection-item center-align">{this.props.release}</li>
                 </ul>
             </div>
         )

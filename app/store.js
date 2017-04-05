@@ -1,6 +1,9 @@
-// import {createStore} from 'redux';
 var Redux = require('redux');
+var ReactRedux = require('react-redux');
+var connect = ReactRedux.connect;
 var createStore = Redux.createStore;
+var Movies = require('./pages/movies');
+
 
 const ADD_MOVIE = "ADD_MOVIE";
 const DEL_MOVIE = "DEL_MOVIE";
@@ -47,7 +50,6 @@ function movies (state = [], action) {
     console.log(state)
     switch (action.type) {
         case ADD_MOVIE:
-            console.log("ADD_MOVIE") 
             return [
                 ...state, 
                 {
@@ -64,10 +66,18 @@ function movies (state = [], action) {
     }
 }
 
-function tvshows (state, action) {
+function tvshows (state = [], action) {
     switch (action.type) {
         case ADD_TVSHOW: 
-            return state;
+            console.log('ADD_TVSHOW')
+            return [
+                ...state, 
+                {
+                    title: action.tvshow,
+                    imageURL: 'https://image.tmdb.org/t/p/w300/45Y1G5FEgttPAwjTYic6czC9xCn.jpg',
+                    release: '2017'
+                }
+            ]
         case DEL_TVSHOW:
             return state;
     }
@@ -100,5 +110,7 @@ module.exports = {
     tvshows,
     books,
     addMovie,
-    delMovie
+    delMovie,
+    addTVShow,
+    delTVShow
 }

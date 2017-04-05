@@ -1,6 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var store = require('../store');
 
 class AddItem extends React.Component { 
     componentDidMount() {
@@ -10,7 +9,7 @@ class AddItem extends React.Component {
 
         $this[0].addEventListener('submit', function(e) {
             e.preventDefault();
-            store.store.dispatch(self.props.add(e.target[0].value))
+            self.props.add(e.target[0].value)
             e.target[0].value = "";
             $($this[0]).modal('close');
         });
@@ -18,6 +17,7 @@ class AddItem extends React.Component {
     }
 
     render () {
+        console.log(this.props)
         return (
             <div id="insert" className="modal">
                 <div className="modal-content">
@@ -35,9 +35,7 @@ class AddItem extends React.Component {
                                 <button id="saveTask" className="btn waves-effect waves-light right" type="submit" name="action">Save</button>
                             </div>
                         </div>
-                    
                     </form>
-                    
                 </div>
             </div>
         )
