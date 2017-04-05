@@ -7,12 +7,11 @@ var Link = ReactRouter.Link;
 class SideNav extends React.Component {
     componentDidMount () {
         // var $this = $(ReactDOM.findDOMNode(this));
-
         window.requestAnimationFrame(function () {
             $('.button-collapse').sideNav({
                 menuWidth: 140, // Default is 300
                 edge: 'left', // Choose the horizontal origin
-                closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
                 draggable: true // Choose whether you can drag to open on touch screens
             });
         });
@@ -27,7 +26,7 @@ class SideNav extends React.Component {
                     <li><Link to="/tvshows"><i className="material-icons right">tv</i></Link></li>
                     <li><Link to="/books"><i className="material-icons right">book</i></Link></li>
                 </ul>
-                <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+                <a href="#" data-activates="slide-out" className="button-collapse"><i className="material-icons">menu</i></a>
             </div>
         )
     }
@@ -42,10 +41,13 @@ class NavBar extends React.Component {
                     <nav>
                         <div className="nav-wrapper red center">
                             <a href="#!" className="brand-logo">My Life App</a>
+                            <SideNav />
                         </div>
+                        
                     </nav>
-                    <SideNav />
+                    
                 </div>
+                
             </header>
         )
     }
@@ -57,6 +59,7 @@ class Home extends React.Component {
         return (
             <div>
                 <NavBar />
+                
                 <main>
                     <div className="container">
                         {this.props.children}

@@ -52,8 +52,8 @@ function movies (state = [], action) {
                 ...state, 
                 {
                     title: action.film,
-                    imageURL: '',
-                    release: ''
+                    imageURL: 'https://image.tmdb.org/t/p/w300/45Y1G5FEgttPAwjTYic6czC9xCn.jpg',
+                    release: '2017'
                 }   
             ]
         case DEL_MOVIE:
