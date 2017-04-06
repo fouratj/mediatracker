@@ -1,0 +1,52 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy --only functions
+[debug] CLI Version:  3.5.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.10.0
+[debug] Time:         Thu Apr 06 2017 11:52:12 GMT-0300 (-03)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/OmRvrSzarAOQU4yUeZFlc931X7xZIA5x_uC1zUo6XD8',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Apr 06 2017 11:52:12 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mylifetracker-b6177  
+ Thu Apr 06 2017 11:52:13 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/mylifetracker-b6177/tokens  
+ Thu Apr 06 2017 11:52:15 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'mylifetracker-b6177'...
+[info] 
+[info] i  deploying functions
+[debug] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "firebase-admin": "^4.1.2",
+    "firebase-functions": "^0.5"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/mylifetracker-b6177?view=CONSUMER_VIEW  
+ Thu Apr 06 2017 11:52:19 GMT-0300 (-03)
+[debug] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/mylifetracker-b6177?view=CONSUMER_VIEW  
+ Thu Apr 06 2017 11:52:19 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[warn] ⚠  runtimeconfig: missing necessary APIs. Enabling now...
+[debug] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/mylifetracker-b6177?updateMask=usageSettings { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Thu Apr 06 2017 11:52:21 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[warn] ⚠  functions: missing necessary APIs. Enabling now...
+[debug] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/mylifetracker-b6177?updateMask=usageSettings { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Thu Apr 06 2017 11:52:21 GMT-0300 (-03)
+[debug] <<< HTTP RESPONSE 200
+[debug] <<< HTTP RESPONSE 200

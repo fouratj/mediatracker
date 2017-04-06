@@ -1,15 +1,12 @@
 var React = require('react');
 // COMPONENTS
-var Page = require('../components/page');
-var FAButton = require('../components/FAButton'); //Fixed Action Button
-var AddItem = require('../components/modal'); //MODAL for adding movie
-var Row = require('../components/row');
+var Page = require('./page');
+var FAButton = require('./FAButton'); //Fixed Action Button
+var AddItem = require('./modal'); //MODAL for adding movie
+var Row = require('./row');
 // /COMPONENTS
 
 class Movies extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render () {
         return (

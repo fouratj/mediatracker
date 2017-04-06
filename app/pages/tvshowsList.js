@@ -2,33 +2,34 @@ var Redux = require('redux');
 var ReactRedux = require('react-redux');
 var connect = ReactRedux.connect;
 var store = require('../store');
-var addMovie = store.addMovie;
+var addTVShow = store.addTVShow;
 
-var Movies = require('../components/movies');
+var tvshows = require('./tvshows');
 
 const getMedia = (state) => {
-    return state.movies;
+    return state.tvshows;
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
   return {
-    movies: getMedia(state)
+    tvshows: getMedia(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMovie: (movie) => {
+    addTVShow: (tvshow) => {
         console.log('mapDispatch')
-        console.log(movie)
-        dispatch(addMovie(movie))
+        console.log(tvshow)
+        dispatch(addTVShow(tvshow))
     }
   }
 }
 
-const moviesList = connect(
+const tvshowsList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Movies)
+)(tvshows)
 
-module.exports = moviesList;
+module.exports = tvshowsList;

@@ -2,8 +2,7 @@ var Redux = require('redux');
 var ReactRedux = require('react-redux');
 var connect = ReactRedux.connect;
 var createStore = Redux.createStore;
-var Movies = require('./pages/movies');
-
+var Movies = require('./components/movies');
 
 const ADD_MOVIE = "ADD_MOVIE";
 const DEL_MOVIE = "DEL_MOVIE";
@@ -47,7 +46,6 @@ function delBook (book) {
 
 // REDUCERS
 function movies (state = [], action) {
-    console.log(state)
     switch (action.type) {
         case ADD_MOVIE:
             return [
@@ -67,6 +65,7 @@ function movies (state = [], action) {
 }
 
 function tvshows (state = [], action) {
+    console.log('tvshowState: ', state)
     switch (action.type) {
         case ADD_TVSHOW: 
             console.log('ADD_TVSHOW')
@@ -80,14 +79,25 @@ function tvshows (state = [], action) {
             ]
         case DEL_TVSHOW:
             return state;
+        default:
+            return state;
     }
 }
 
-function books (state, action) {
+function books (state = [], action) {
     switch (action.type) {
         case ADD_BOOK: 
+        return [
+            ...state, {
+                title: action.book,
+                imageURL: 'https://image.tmdb.org/t/p/w300/45Y1G5FEgttPAwjTYic6czC9xCn.jpg',
+                release: '2017'
+            }
+        ]
             return state;
         case DEL_BOOK:
+            return state;
+        default:
             return state;
     }
 }
@@ -112,5 +122,7 @@ module.exports = {
     addMovie,
     delMovie,
     addTVShow,
-    delTVShow
+    delTVShow,
+    addBook,
+    delBook
 }

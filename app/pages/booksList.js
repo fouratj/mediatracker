@@ -2,33 +2,33 @@ var Redux = require('redux');
 var ReactRedux = require('react-redux');
 var connect = ReactRedux.connect;
 var store = require('../store');
-var addMovie = store.addMovie;
+var addBook = store.addBook;
 
-var Movies = require('../components/movies');
+var Books = require('./books');
 
 const getMedia = (state) => {
-    return state.movies;
+    return state.books;
 }
 
 const mapStateToProps = (state) => {
   return {
-    movies: getMedia(state)
+    books: getMedia(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addMovie: (movie) => {
+    addBook: (book) => {
         console.log('mapDispatch')
-        console.log(movie)
-        dispatch(addMovie(movie))
+        console.log(book)
+        dispatch(addBook(book))
     }
   }
 }
 
-const moviesList = connect(
+const booksList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Movies)
+)(Books)
 
-module.exports = moviesList;
+module.exports = booksList;
