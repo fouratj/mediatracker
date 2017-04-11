@@ -26,7 +26,7 @@ function sendViaCors (request, response, uri) {
     }); // /PROMISE
 }
 
-// var tvID = "http://api.themoviedb.org/3/tv/"
+
 exports.searchMovie = functions.https.onRequest((request, response) => {
     const movieDBURI = 'https://api.themoviedb.org/3/search/movie?api_key='; //&api_key=
     const APIKey = '83e042991949ef7ee9683a5682d8fd7e';
@@ -42,6 +42,8 @@ exports.searchMovie = functions.https.onRequest((request, response) => {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
         response.send(body);
+    }).catch(function (error) {
+        reject();
     });
 
 });
@@ -83,9 +85,30 @@ exports.searchShow = functions.https.onRequest((request, response) => {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
         response.send(body);
+    }).catch(function (error) {
+        reject();
     });
 
 });
+
+exports.getShow = functions.https.onRequest((request, response) => {
+    const tvIDURI = "http://api.themoviedb.org/3/tv/{id}?api_key=";
+    const APIKey = '83e042991949ef7ee9683a5682d8fd7e';
+
+    if (!request.query.target) {
+        response.send("Can't send empty string");
+    }
+
+    uri = tvDBURI.replace("{id}", request.query.target) + APIKey;
+
+    new Promise(function (resolve, reject) {
+        resolve(sendViaCors(request, response, uri));
+    }).then(function(body) {
+        response.send(body);
+    }).catch(function (error) {
+        reject();
+    });
+})
 
 exports.searchBook = functions.https.onRequest((request, response) => {
     let name = request.query.target;
@@ -102,6 +125,8 @@ exports.searchBook = functions.https.onRequest((request, response) => {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
         response.send(body);
+    }).catch(function (error) {
+        reject();
     });
 
 });
