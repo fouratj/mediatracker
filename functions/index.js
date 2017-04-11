@@ -41,18 +41,11 @@ exports.searchMovie = functions.https.onRequest((request, response) => {
     uri = movieDBURI + APIKey + '&query=' + encodeURIComponent(request.query.target);
 
     new Promise(function (resolve, reject) {
-        resolve(sendViaCors(request, response, uri))
+        resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
-        response.send(body)
+        response.send(body);
     });
 
-});
-
-exports.putMovie = functions.https.onRequest((request, response) => {
-
-    cors(request, response, () => {
-
-    });
 });
 
 exports.searchShow = functions.https.onRequest((request, response) => {
@@ -67,9 +60,9 @@ exports.searchShow = functions.https.onRequest((request, response) => {
     uri = tvSearchURI + APIKey + '&query=' + encodeURIComponent(request.query.target);
 
     new Promise(function (resolve, reject) {
-        resolve(sendViaCors(request, response, uri))
+        resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
-        response.send(body)
+        response.send(body);
     });
 
 });
@@ -86,9 +79,9 @@ exports.searchBook = functions.https.onRequest((request, response) => {
     uri = 'https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent(name) +  '&' + APIkey + '&country=US';
 
     new Promise(function (resolve, reject) {
-        resolve(sendViaCors(request, response, uri))
+        resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
-        response.send(body)
+        response.send(body);
     });
 
 });

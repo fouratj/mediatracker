@@ -5,7 +5,6 @@ var store = require('../store');
 
 class Page extends React.Component {
     
-    
     render () {
         var items = this.props.media.map((media, index) => {
             return <Card key={index} item={media} del={this.props.del} classType={this.props.type} />
@@ -20,9 +19,7 @@ class Page extends React.Component {
 
     componentDidMount () {
         // var $this = $(ReactDOM.findDOMNode(this));
-        var items = this.props.type;
-        console.log(items)
-        $('.' + items).matchHeight();
+        $('.' + this.props.type).matchHeight();
     }
 }
 
