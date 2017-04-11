@@ -27,7 +27,6 @@ function sendViaCors (request, response, uri) {
     }); // /PROMISE
 }
 
-
 // var tvID = "http://api.themoviedb.org/3/tv/"
 exports.searchMovie = functions.https.onRequest((request, response) => {
     const movieDBURI = 'https://api.themoviedb.org/3/search/movie?api_key='; //&api_key=

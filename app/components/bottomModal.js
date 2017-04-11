@@ -10,6 +10,7 @@ class SearchElement extends React.Component {
     }
 
     handleChange (e) {
+        var $this = $(ReactDOM.findDOMNode(this));
         this.setState({
             isChecked: e.target.checked
         });
@@ -22,12 +23,13 @@ class SearchElement extends React.Component {
         
         setTimeout(() => {
             $('img').matchHeight();
-        }, 50)
+            $($this[0]).hide();
+        }, 50);
     }
 
     render () {
         return (
-            <li className="collection-item avatar" key={this.props.aKey}>
+            <li className="collection-item avatar" id={this.props.aKey + 'result'} key={this.props.aKey}>
                 <img alt className="circle" src={this.props.result.poster} />
                 <p className="flow-text"> {this.props.result.title} </p>
                 <p> {this.props.result.released}</p>

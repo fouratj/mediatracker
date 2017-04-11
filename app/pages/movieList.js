@@ -12,11 +12,15 @@ const getResults = (state) => {
   return state.search;
 }
 
+const getIndex = (state) => {
+  return state.movieIndex;
+}
+
 const mapStateToProps = (state, ownProps) => {
-  
   return {
     movies: getMedia(state),
-    results: getResults(state)
+    results: getResults(state),
+    index: getIndex(state)
   }
 }
 

@@ -21,7 +21,8 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 function mediaTracker () {
-    var moviesRef = firebase.database().ref(currentUser.uid + 'movies').limitToLast(5);
+    console.log(store.getState())
+    var moviesRef = firebase.database().ref(currentUser.uid + 'movies').limitToLast(100);
 
     moviesRef.on('value', function(data) {
         var movies = data.val();

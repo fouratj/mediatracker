@@ -5,7 +5,7 @@ class CardImage extends React.Component {
     render () {
         return (
             <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={this.props.imageURL} />
+                <img className="activator responsive-img" src={this.props.imageURL} />
             </div>
         )
     }

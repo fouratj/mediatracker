@@ -3,6 +3,21 @@ var ReactDOM = require('react-dom');
 var Card = require('./card');
 var store = require('../store');
 
+class Button extends React.Component {
+    render () {
+        return (
+            <div className="row">
+                <div className="col s6 center">
+                    <a className="waves-effect waves-light btn center"><i className="material-icons left">arrow_back</i></a>
+                </div>
+                <div className="col s6 center">
+                    <a className="waves-effect waves-light btn center"><i className="material-icons right">arrow_forward</i></a>
+                </div>
+            </div>
+        )
+    }
+}
+
 class Page extends React.Component {
     
     render () {
@@ -11,15 +26,20 @@ class Page extends React.Component {
         });
 
         return (
-            <div >
+            <div>
                 {items}
+                <Button />
             </div>
         )
     }
 
     componentDidMount () {
         // var $this = $(ReactDOM.findDOMNode(this));
-        $('.' + this.props.type).matchHeight();
+        $('img').matchHeight();
+    }
+
+    componentDidUpdate () {
+        
     }
 }
 

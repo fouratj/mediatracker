@@ -1,6 +1,5 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-// import { store } from '../store';
 import { Link } from 'react-router';
 
 import firebase from 'firebase';
@@ -12,10 +11,6 @@ class SideNav extends React.Component {
         super(props);
         this.handleSignIn = this.handleSignIn.bind(this);
         this.handleSignOut = this.handleSignOut.bind(this);
-    }
-
-    componentWillMount () {
-
     }
 
     componentDidMount () {
@@ -63,7 +58,6 @@ class SideNav extends React.Component {
                     <li><Link to="/books"><i className="material-icons right">book</i></Link></li>
                     <li><Link to="/stats"><i className="material-icons right">info</i></Link></li>
                 </ul>
-                
             </div>
         )
     }
@@ -80,9 +74,7 @@ class NavBar extends React.Component {
                             <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
                             <a href="#!" className="brand-logo center">My Life App</a>
                         </div>
-                        
                     </nav>
-                    
                 </div>
                 <SideNav />
             </header>
@@ -107,5 +99,3 @@ export default class Home extends React.Component {
         )
     }
 };
-
-// module.exports = Home;

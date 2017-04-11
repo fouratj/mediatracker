@@ -10,22 +10,30 @@ import { ReactRedux, connect } from 'react-redux';
 
 const ADD_MOVIE = "ADD_MOVIE";
 const DEL_MOVIE = "DEL_MOVIE";
-const RESET_MOVIES = "RESET_MOVIE"
+const RESET_MOVIES = "RESET_MOVIE";
+const MOVIE_INDEX = "MOVIE_INDEX";
+const UPDATE_MOVIE_INDEX = "UPDATE_MOVIE_INDEX";
 const ADD_TVSHOW = "ADD_TVSHOW";
 const DEL_TVSHOW = "DEL_TVSHOW";
 const RESET_TVSHOWS = "RESET_TVSHOWS";
+
 const ADD_BOOK = "ADD_BOOK";
 const DEL_BOOK = "DEL_BOOK";
 const RESET_BOOKS = "RESET_BOOKS"
+
 const ADD_SEARCH = "ADD_SEARCH";
 
 const initialState = {
   movies: [],
   tvshows: [],
   books: [],
-  search: []
+  search: [],
+  movieIndex: 0,
+  tvshowsIndex: 0,
+  booksIndex: 0
 }
 
+//MOVIES
 export function addMovie (film) {
     return { type: ADD_MOVIE, film }
 }
@@ -38,6 +46,16 @@ export function resetMovies () {
     return { type: RESET_MOVIES }
 }
 
+export function returnMovieIndex () {
+    return { type: MOVIE_INDEX}
+}
+
+export function updateMovieIndex (index) {
+    return { type: UPDATE_MOVIE_INDEX, index }
+}
+// /MOVIES
+
+// TVSHOWS
 export function addTVShow (tvshow) {
     return { type: ADD_TVSHOW, tvshow }
 }
@@ -68,6 +86,8 @@ export function addSearch (results) {
 
 
 
+
+
 // ACTIONS
 export function movies (state = [], action) {
     switch (action.type) {
@@ -85,6 +105,8 @@ export function movies (state = [], action) {
             return state.filter( item => item.title != action.film.title);
         case RESET_MOVIES:
             return [];
+        case UPDATE_MOVIE_INDEX:
+            return action.index;
         default:
             return state;
     }
@@ -157,7 +179,6 @@ export function resetStateOnSignOut () {
 }
 
 export function mylifeapp (state = initialState, actions) {
-
     return {
         movies: movies(state.movies, actions),
         tvshows: tvshows(state.tvshows, actions),
