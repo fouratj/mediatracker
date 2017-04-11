@@ -82,9 +82,9 @@ export function addTVShowToDB (tvshow) {
     tvshowsRef.push(tvshow);
 }
 
-export function addMovieToDB (movie) {
+export function addBookToDB (movie) {
     var booksRef = database.ref( currentUser.uid + 'books');
-    bookssRef.push(movie);
+    booksRef.push(movie);
 }
 
 export function signIn () {
