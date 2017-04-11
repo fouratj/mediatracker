@@ -11,20 +11,44 @@ class SearchElement extends React.Component {
 
     handleChange (e) {
         var $this = $(ReactDOM.findDOMNode(this));
+        var self = this;
         this.setState({
             isChecked: e.target.checked
         });
         
         if (e.target.checked) {
-            this.props.add(this.props.result);
-        } else {
-            this.props.del(this.props.result);
+            //this.props.add(this.props.result);
         }
         
         setTimeout(() => {
             $('img').matchHeight();
             $($this[0]).hide();
         }, 50);
+
+        let url = this.props.url;
+        
+        let getFullInfo = $.get(url, { 'target': this.props.result.id}, function (data) {
+                let res = JSON.parse(data);
+                
+                let item = {
+                    id: res.id,
+                    poster: res.poster_path,
+                    released: res.release_date,
+                    title: res.title,
+                    runtime: res.runtime,
+                    synopsis: res.overview,
+                    count: 1,
+                    createdBy: ''
+                };
+
+                self.props.add(item);
+                
+            
+                $('img').matchHeight();
+                $($this[0]).hide();
+                
+            
+            });
     }
 
     render () {
@@ -47,26 +71,20 @@ class BottomModal extends React.Component {
         super(props);
     }
 
-    componentWillMount () {
-
-    }
-
     componentDidMount () {
         var $this = $(ReactDOM.findDOMNode(this));
         $($this[0]).modal();
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.results.length > 0)
-            return true;
-
-        return false;
+        // if (nextProps.results.length > 0)
+        return true;
     }
 
     render () {  
         let results = [];
         results = this.props.results.map((result, index) => {
-            return  <SearchElement checked={false} add={this.props.add} del={this.props.del} result={result} key={index} aKey={index} />
+            return  <SearchElement url={this.props.url} checked={false} add={this.props.add} del={this.props.del} result={result} key={index} aKey={index} />
         });
         
         return (

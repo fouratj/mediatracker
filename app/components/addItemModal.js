@@ -11,14 +11,13 @@ class AddItem extends React.Component {
         $this[0].addEventListener('submit', function(e) {
             e.preventDefault();
             let post = $.get(url, { 'target': e.target[0].value}, function (data) {
-                console.log(data)
                 let res = JSON.parse(data);
                 let results = [];
 
                 if (res.total_results > 0 || res.totalItems > 0) {
                     results = res.results || res.items;
                 }
-                // console.log(results);
+                
                 self.props.addSearch(results);
 
                 $($this[0]).modal('close');

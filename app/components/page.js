@@ -4,14 +4,39 @@ var Card = require('./card');
 var store = require('../store');
 
 class Button extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { index: this.props.index }
+        this.handleClickBack = this.handleClickBack.bind(this);
+        this.handleClickFwd = this.handleClickFwd.bind(this);
+    }
+
+    handleClickBack () {
+        if (this.state.index >= 50) {
+            let newIndex = this.state.index - 50;
+            this.props.updateIndex(newIndex);
+            this.setState({
+                index: newIndex
+            });
+        }
+    }
+
+    handleClickFwd () {
+        let newIndex = this.state.index + 50;
+        this.props.updateIndex(newIndex);
+        this.setState({
+            index: newIndex
+        });
+    }
+
     render () {
         return (
             <div className="row">
                 <div className="col s6 center">
-                    <a className="waves-effect waves-light btn center"><i className="material-icons left">arrow_back</i></a>
+                    <a onClick={this.handleClickBack} className="waves-effect waves-light btn center"><i className="material-icons left">arrow_back</i></a>
                 </div>
                 <div className="col s6 center">
-                    <a className="waves-effect waves-light btn center"><i className="material-icons right">arrow_forward</i></a>
+                    <a onClick={this.handleClickFwd} className="waves-effect waves-light btn center"><i className="material-icons right">arrow_forward</i></a>
                 </div>
             </div>
         )
@@ -28,7 +53,7 @@ class Page extends React.Component {
         return (
             <div>
                 {items}
-                <Button />
+                <Button index={this.props.index} updateIndex={this.props.updateIndex} />
             </div>
         )
     }
@@ -38,8 +63,7 @@ class Page extends React.Component {
         $('img').matchHeight();
     }
 
-    componentDidUpdate () {
-        
+    componentDidUpdate () {        
     }
 }
 

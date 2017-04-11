@@ -1,6 +1,6 @@
 import Redux from 'redux';
 import { connect } from 'react-redux';
-import { addMovie, delMovie, addSearch } from '../store';
+import { addMovie, delMovie, addSearch, updateMoviesIndex } from '../store';
 import Movies from '../components/movies';
 import {addMovieToDB} from '../firebase.js';
 
@@ -13,7 +13,7 @@ const getResults = (state) => {
 }
 
 const getIndex = (state) => {
-  return state.movieIndex;
+  return state.indices.movies;
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -26,8 +26,21 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addMovie: (movie) => {
-        //dispatch(addMovie(movie))
+    addMovie: (res) => {
+        let posterPath = "https://image.tmdb.org/t/p/w300";
+
+        let movie = {
+            id: res.id,
+            poster: posterPath + res.poster_path,
+            released: res.release_date,
+            title: res.title,
+            runtime: res.runtime,
+            synopsis: res.overview,
+            count: 1,
+            createdBy: '',
+            dateAdded: Date.now()
+        };
+
         addMovieToDB(movie);
     },
     addSearch: (res) => {
@@ -45,6 +58,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     delMovie: (movie) => {
       dispatch(delMovie(movie))
+    },
+    updateIndex: (newIndex) => {
+      dispatch(updateMoviesIndex(newIndex))
     }
   }
 }

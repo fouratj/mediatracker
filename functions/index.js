@@ -8,16 +8,15 @@ function sendViaCors (request, response, uri) {
     return new Promise((resolve, reject) => {
         cors(request, response, () => {
             var onFinish = function (res) {
-                    var body = '';
-                    res.on('data', (d) => {
-                        body += d
-                    });
+                var body = '';
+                res.on('data', (d) => {
+                    body += d
+                });
 
-                    res.on('end', () => {
-                        console.log(body)
-                        resolve(body)
-                        //response.send(body);
-                    });         
+                res.on('end', () => {
+                    console.log(body)
+                    resolve(body)
+                });         
             }
 
             https.get(uri, onFinish);
@@ -43,6 +42,28 @@ exports.searchMovie = functions.https.onRequest((request, response) => {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
         response.send(body);
+    });
+
+});
+
+exports.getMovie = functions.https.onRequest((request, response) => {
+    const movieDBURI = 'https://api.themoviedb.org/3/movie/{id}?api_key=';
+    // https://api.themoviedb.org/3/movie/343611?api_key={api_key}
+    const APIKey = '83e042991949ef7ee9683a5682d8fd7e';
+    let uri;
+
+    if(!request.query.target) {
+        response.send("Can't send empty string");
+    }
+
+    uri = movieDBURI.replace("{id}", request.query.target) + APIKey;
+
+    new Promise(function (resolve, reject) {
+        resolve(sendViaCors(request, response, uri));
+    }).then(function(body) {
+        response.send(body);
+    }).catch(function (error) {
+        reject();
     });
 
 });
