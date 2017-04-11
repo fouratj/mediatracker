@@ -1,17 +1,28 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { store } from '../store';
+// import { store } from '../store';
 import { Link } from 'react-router';
+
+import firebase from 'firebase';
 import { signIn, signOut } from '../firebase';
+import { store, resetStateOnSignOut } from '../store';
 
 class SideNav extends React.Component {
     constructor (props) {
         super(props);
-
         this.handleSignIn = this.handleSignIn.bind(this);
+        this.handleSignOut = this.handleSignOut.bind(this);
     }
+
+    componentWillMount () {
+
+    }
+
     componentDidMount () {
         // var $this = $(ReactDOM.findDOMNode(this));
+        let signInButton = document.getElementById('sign-in');
+        let signOutButton = document.getElementById('sign-out');
+
         $('.button-collapse').sideNav({
             menuWidth: 140, // Default is 300
             edge: 'left', // Choose the horizontal origin
@@ -19,21 +30,26 @@ class SideNav extends React.Component {
             draggable: true // Choose whether you can drag to open on touch screens
         });
 
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                signInButton.setAttribute('hidden', true);
+                signOutButton.removeAttribute('hidden');
+
+            } else {
+                signOutButton.setAttribute('hidden', true);
+                signInButton.removeAttribute('hidden');
+                resetStateOnSignOut();
+            }
+        });
+
     }
 
     handleSignIn () {
-        var signInButton = document.getElementById('sign-in');
-        return new Promise(function (resolve, reject) {
-            resolve(signIn())
-        }).then(function (res) {
-            console.log(res)
-            signInButton.setAttribute('hidden', true);
-        })
-        
+        signIn()        
     }
 
     handleSignOut () {
-        signOut();
+        signOut()        
     }
 
     render () {
@@ -41,11 +57,11 @@ class SideNav extends React.Component {
             <div>
                 <ul id="slide-out" className="side-nav fixed teal">
                     <li id="sign-in" onClick={this.handleSignIn}><a href="#">Sign In</a></li>
-                    <li id="sign-out" onClick={signOut.bind(this)}><a href="#">Sign Out</a></li>
+                    <li hidden id="sign-out" onClick={this.handleSignOut}><a href="#">Sign Out</a></li>
                     <li><Link to="/movies"><i className="material-icons right">movie</i></Link></li>
                     <li><Link to="/tvshows"><i className="material-icons right">tv</i></Link></li>
                     <li><Link to="/books"><i className="material-icons right">book</i></Link></li>
-                    
+                    <li><Link to="/stats"><i className="material-icons right">info</i></Link></li>
                 </ul>
                 
             </div>

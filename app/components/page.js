@@ -12,7 +12,7 @@ class Page extends React.Component {
         });
 
         return (
-            <div className="row">
+            <div >
                 {items}
             </div>
         )

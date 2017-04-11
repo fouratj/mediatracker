@@ -10,10 +10,13 @@ import { ReactRedux, connect } from 'react-redux';
 
 const ADD_MOVIE = "ADD_MOVIE";
 const DEL_MOVIE = "DEL_MOVIE";
+const RESET_MOVIES = "RESET_MOVIE"
 const ADD_TVSHOW = "ADD_TVSHOW";
 const DEL_TVSHOW = "DEL_TVSHOW";
+const RESET_TVSHOWS = "RESET_TVSHOWS";
 const ADD_BOOK = "ADD_BOOK";
 const DEL_BOOK = "DEL_BOOK";
+const RESET_BOOKS = "RESET_BOOKS"
 const ADD_SEARCH = "ADD_SEARCH";
 
 const initialState = {
@@ -31,6 +34,10 @@ export function delMovie (film) {
     return {type: DEL_MOVIE, film}
 }
 
+export function resetMovies () {
+    return { type: RESET_MOVIES }
+}
+
 export function addTVShow (tvshow) {
     return { type: ADD_TVSHOW, tvshow }
 }
@@ -39,12 +46,20 @@ export function delTVShow (tvshow) {
     return { type: DEL_TVSHOW, tvshow }
 }
 
+export function resetTVshows () {
+    return { type: RESET_TVSHOWS}
+}
+
 export function addBook (book) {
     return { type: ADD_BOOK, book }
 }
 
 export function delBook (book) {
     return { type: DEL_BOOK, book }
+}
+
+export function resetBooks () {
+    return { type: RESET_BOOKS}
 }
 
 export function addSearch (results) {
@@ -68,6 +83,8 @@ export function movies (state = [], action) {
             ]
         case DEL_MOVIE:
             return state.filter( item => item.title != action.film.title);
+        case RESET_MOVIES:
+            return [];
         default:
             return state;
     }
@@ -88,6 +105,8 @@ export function tvshows (state = [], action) {
             ]
         case DEL_TVSHOW:
             return state.filter(item => (item.title != action.tvshow.title));
+        case RESET_TVSHOWS:
+            return [];
         default:
             return state;
     }
@@ -110,6 +129,8 @@ export function books (state, action) {
             return state
                         .filter(item => ( item.title != action.book.title ))
                         .filter(item => ( item.id != action.book.id ));
+        case RESET_BOOKS:
+            return [];
         default:
             return state;
     }
@@ -128,6 +149,12 @@ export function search (state = [], action) {
     
 }
 // /ACTIONS
+
+export function resetStateOnSignOut () {
+    store.dispatch(resetMovies());
+    store.dispatch(resetTVshows());
+    store.dispatch(resetBooks());
+}
 
 export function mylifeapp (state = initialState, actions) {
 

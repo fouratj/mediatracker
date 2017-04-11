@@ -23,7 +23,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addMovie: (movie) => {
-        dispatch(addMovie(movie))
+        //dispatch(addMovie(movie))
         addMovieToDB(movie);
     },
     addSearch: (res) => {

@@ -75,13 +75,15 @@ class CardReveal extends React.Component {
 
 class Card extends React.Component {
     render () {
-        let classType = "col s6 m4 l3 card item " + this.props.classType;
+        let classType = "card item " + this.props.classType;
         return (
-                <div className={classType} style={{padding: '0', margin: '5px'}}>
+            <div className="col s6 m4 l3">
+                <div className={classType} >
                     <CardImage imageURL={this.props.item.poster}/>
                     <CardContent title={this.props.item.title} released={this.props.item.released} />
                     <CardReveal item={this.props.item} del={this.props.del} />
                 </div>
+            </div>
         )
     }
 }

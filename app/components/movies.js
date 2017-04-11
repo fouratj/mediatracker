@@ -11,7 +11,7 @@ class Movies extends React.Component {
     render () {
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchMovie'
         return (
-            <div>
+            <div className="row">
                 <Page media={this.props.movies} del={this.props.delMovie} type="movies"/>
 
                 <FAButton />
