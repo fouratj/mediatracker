@@ -1,39 +1,53 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-
-var ReactRedux = require('react-redux');
-var Provider = ReactRedux.Provider;
-
-var state = require('../store');
-var store = state.store;
-
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
-
+import React from 'react';
+import { Provider } from 'react-redux';
+import { store } from '../store';
+import { Link } from 'react-router';
+import { signIn, signOut } from '../firebase';
 
 class SideNav extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.handleSignIn = this.handleSignIn.bind(this);
+    }
     componentDidMount () {
         // var $this = $(ReactDOM.findDOMNode(this));
-        window.requestAnimationFrame(function () {
-            $('.button-collapse').sideNav({
-                menuWidth: 140, // Default is 300
-                edge: 'left', // Choose the horizontal origin
-                closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
-                draggable: true // Choose whether you can drag to open on touch screens
-            });
+        $('.button-collapse').sideNav({
+            menuWidth: 140, // Default is 300
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
         });
 
+    }
+
+    handleSignIn () {
+        var signInButton = document.getElementById('sign-in');
+        return new Promise(function (resolve, reject) {
+            resolve(signIn())
+        }).then(function (res) {
+            console.log(res)
+            signInButton.setAttribute('hidden', true);
+        })
+        
+    }
+
+    handleSignOut () {
+        signOut();
     }
 
     render () {
         return (
             <div>
                 <ul id="slide-out" className="side-nav fixed teal">
-                    <li><Link to="/movies" className=""><i className="material-icons right">movie</i></Link></li>
+                    <li id="sign-in" onClick={this.handleSignIn}><a href="#">Sign In</a></li>
+                    <li id="sign-out" onClick={signOut.bind(this)}><a href="#">Sign Out</a></li>
+                    <li><Link to="/movies"><i className="material-icons right">movie</i></Link></li>
                     <li><Link to="/tvshows"><i className="material-icons right">tv</i></Link></li>
                     <li><Link to="/books"><i className="material-icons right">book</i></Link></li>
+                    
                 </ul>
-                <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+                
             </div>
         )
     }
@@ -47,27 +61,26 @@ class NavBar extends React.Component {
                 <div className="navbar-fixed">
                     <nav>
                         <div className="nav-wrapper red center">
-                            <a href="#!" className="brand-logo">My Life App</a>
-                            <SideNav />
+                            <a href="#" data-activates="slide-out" className="button-collapse show-on-large"><i className="material-icons">menu</i></a>
+                            <a href="#!" className="brand-logo center">My Life App</a>
                         </div>
                         
                     </nav>
                     
                 </div>
-                
+                <SideNav />
             </header>
         )
     }
 }
 
-class Home extends React.Component {
+export default class Home extends React.Component {
 
     render () {
         return (
             <Provider store={store}>
                 <div>
                     <NavBar />
-                    
                     <main>
                         <div className="container">
                             {this.props.children}
@@ -79,4 +92,4 @@ class Home extends React.Component {
     }
 };
 
-module.exports = Home;
+// module.exports = Home;

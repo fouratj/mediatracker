@@ -6,22 +6,34 @@ class AddItem extends React.Component {
         var self = this;
         var $this = $(ReactDOM.findDOMNode(this));
         $($this[0]).modal();
+        let url = this.props.url;
 
         $this[0].addEventListener('submit', function(e) {
             e.preventDefault();
-            self.props.add(e.target[0].value)
-            e.target[0].value = "";
-            $($this[0]).modal('close');
+            let post = $.get(url, { 'target': e.target[0].value}, function (data) {
+                console.log(data)
+                let res = JSON.parse(data);
+                let results = [];
+
+                if (res.total_results > 0 || res.totalItems > 0) {
+                    results = res.results || res.items;
+                }
+                // console.log(results);
+                self.props.addSearch(results);
+
+                $($this[0]).modal('close');
+                $('#bottomModal').modal('open');
+                e.target[0].value = ""; //clears modal only on success
+            });
         });
 
     }
 
     render () {
-        console.log(this.props)
         return (
             <div id="insert" className="modal">
                 <div className="modal-content">
-                    <form id="addItem">
+                    <form id="addItem" method="POST">
 
                         <div className="row">
                             <div className="input-field col s12">

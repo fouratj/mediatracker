@@ -1,34 +1,51 @@
-var Redux = require('redux');
-var ReactRedux = require('react-redux');
-var connect = ReactRedux.connect;
-var store = require('../store');
-var addMovie = store.addMovie;
-
-var Movies = require('../components/movies');
+import Redux from 'redux';
+import { connect } from 'react-redux';
+import { addMovie, delMovie, addSearch } from '../store';
+import Movies from '../components/movies';
+import {addMovieToDB} from '../firebase.js';
 
 const getMedia = (state) => {
     return state.movies;
 }
 
-const mapStateToProps = (state) => {
+const getResults = (state) => {
+  return state.search;
+}
+
+const mapStateToProps = (state, ownProps) => {
+  
   return {
-    movies: getMedia(state)
+    movies: getMedia(state),
+    results: getResults(state)
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addMovie: (movie) => {
-        console.log('mapDispatch')
-        console.log(movie)
         dispatch(addMovie(movie))
+        addMovieToDB(movie);
+    },
+    addSearch: (res) => {
+      let posterPath = "https://image.tmdb.org/t/p/w300";
+      let results = res.map(movie => {
+        return {
+          title: movie.title,
+          id: movie.id,
+          released: (() => (new Date(movie.release_date).getFullYear()))(),
+          poster: posterPath + movie.poster_path
+        }
+      });
+
+      dispatch(addSearch(results));
+    },
+    delMovie: (movie) => {
+      dispatch(delMovie(movie))
     }
   }
 }
 
-const moviesList = connect(
+export let moviesList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(Movies)
-
-module.exports = moviesList;

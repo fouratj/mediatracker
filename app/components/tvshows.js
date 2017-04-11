@@ -5,27 +5,25 @@ var ReactDOM = require('react-dom');
 var Card = require('../components/card');
 var Page = require('../components/page');
 var FAButton = require('../components/FAButton'); //Fixed Action Button
-var AddItem = require('../components/modal'); //MODAL for adding movie
+var AddItem = require('../components/addItemModal'); //MODAL for adding movie
 var Row = require('../components/row');
+var BottomModal = require('../components/bottomModal');
 // /COMPONENTS
 
 
 class TVShows extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-   
     render () {
-        console.log(this.props)
+        let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchShow';
         return (
             <div>
                 <Row>
-                    <Page media={this.props.tvshows} />
+                    <Page media={this.props.tvshows} del={this.props.delTVShow} type="tvshows" />
                 </Row>
                 <Row>
                     <FAButton />
                 </Row>
-                <AddItem add={this.props.addTVShow}/>
+                <AddItem add={this.props.addTVShow} del={this.props.delTVShow} addSearch={this.props.addSearch} url={url} />
+                <BottomModal add={this.props.addTVShow} del={this.props.delTVShow} results={this.props.results} />
             </div>
         )
     }

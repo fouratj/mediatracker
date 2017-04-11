@@ -4,37 +4,40 @@
   <meta charset="UTF-8">
   <title>Media Tracker</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/css/materialize.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <script src="node_modules/jquery/dist/jquery.js"></script>
-  <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
   <style>
       main {
         flex: 1 0 auto;
       }
 
-      html {
-        /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
+      #app {
+        padding-left: 140px;
       }
 
-      header, main, footer {
-        padding-left: 0px;
-      }
 
-      #sidenav-overlay {
-        opacity: 0 !important;
-      }
 
-      @media only screen and (max-width : 992px) {
-        header, main, footer {
+      @media only screen and (max-width: 992px) {
+        #app {
           padding-left: 0;
         }
+        /*
+        #sidenav-overlay {
+          margin-left: 140px;
+        }
+        */
       }
   </style>
 </head>
 <body>
 
   <div id="app" ></div>
+
+
+
   
 </body>
 </html>

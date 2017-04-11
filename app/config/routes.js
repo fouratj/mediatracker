@@ -1,26 +1,20 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
-var Route = ReactRouter.Route;
-var hashHistory = ReactRouter.hashHistory;
-var IndexRoute = ReactRouter.IndexRoute;
+import React from 'react';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 
-var Home = require('../pages/home');
-var tvshowsList = require('../pages/tvshowsList');
-var booksList = require('../pages/booksList');
-var Stats = require('../pages/stats');
-var Modal = require('../components/modal')
-var movieList = require('../pages/movieList')
+import Home from '../pages/home';
+import { tvshowsList } from '../pages/tvshowsList';
+import { booksList } from '../pages/booksList';
+import { moviesList } from '../pages/movieList';
+import { Stats } from '../pages/stats';
 
-var routes = (
+export let routes = (
     <Router history={hashHistory}>
         <Route path='/' component={Home}>
-            <Route path='/movies' component={movieList} />
+            <IndexRoute />
+            <Route path='/movies' component={moviesList} />
             <Route path='/tvshows' component={tvshowsList} />
             <Route path='/books' component={booksList} />
             <Route path='/stats' component={Stats} />
         </Route>
     </Router>
 );
-
-module.exports = routes;
