@@ -27,10 +27,7 @@ class CardContent extends React.Component {
 
 class CardReveal extends React.Component {
     handleDelete (e) {
-        console.log('clicked delete')
         e.preventDefault()
-        // this.props.del is a callback function to dispatch event to redux 
-        console.log(this.props)
         this.props.del(this.props.item);
     }
 

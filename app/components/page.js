@@ -53,7 +53,7 @@ class Page extends React.Component {
         return (
             <div>
                 {items}
-                <Button index={this.props.index} updateIndex={this.props.updateIndex} />
+                
             </div>
         )
     }

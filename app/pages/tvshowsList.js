@@ -1,16 +1,10 @@
-// var Redux = require('redux');
 import Redux from 'redux';
-// var ReactRedux = require('react-redux');
-// var connect = ReactRedux.connect;
 import { connect } from 'react-redux';
-// var store = require('../store');
-// var addTVShow = store.addTVShow;
-// var delTVShow = store.delTVShow;
-// var addSearch = store.addSearch;
 
-import { addTVShow, delTVShow, addSearch } from '../store';
+import { addTVShow, delTVShow, addSearch, addSeasons } from '../store';
 import tvshows from '../components/tvshows';
-// var tvshows = require('../components/tvshows');
+
+import { addTVShowToDB, delTVShowFromDB } from '../firebase.js';
 
 
 const getMedia = (state) => {
@@ -21,17 +15,31 @@ const getResults = (state) => {
     return state.search;
 }
 
+const getSeasons = (state) => {
+    return state.seasons;
+}
+
 const mapStateToProps = (state) => {
   return {
     tvshows: getMedia(state),
-    results: getResults(state)
+    results: getResults(state),
+    seasons: getSeasons(state)
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTVShow: (tvshow) => {
-        dispatch(addTVShow(tvshow))
+    addTVShow: (res) => {
+        let tvshow = {
+          count: 1,
+          title: res.title,
+          episodes: res.episodes,
+          id: res.id,
+          length: res.length,
+          poster: res.poster,
+          released: res.released
+        };
+        addTVShowToDB(tvshow);
     },
     addSearch: (res) => {
       let posterPath = "https://image.tmdb.org/t/p/w300";
@@ -45,8 +53,26 @@ const mapDispatchToProps = (dispatch) => {
       });
       dispatch(addSearch(results))
     },
+    addSeasons: (res) => {
+      let posterPath = "https://image.tmdb.org/t/p/w300";
+      let title = res.name;
+      let id = res.id;
+      let runtime = res.episode_run_time[0];
+      let results = res.seasons.map(season => {
+        return {
+          title: title,
+          poster: posterPath + season.poster_path,
+          released: season.season_number,
+          id: season.id,
+          episodes: season.episode_count,
+          length: runtime
+        }
+      });
+      dispatch(addSeasons(results));
+    },
     delTVShow: (tvshow) => {
-      dispatch(delTVShow(tvshow))
+      //dispatch(delTVShow(tvshow))
+      delTVShowFromDB(tvshow);
     }
   }
 }

@@ -23,7 +23,7 @@ var database = firebase.database();
 function mediaTracker () {
     var moviesRef = firebase.database().ref(currentUser.uid + 'movies');
     var tvshowsRef = firebase.database().ref(currentUser.uid + 'tvshows');
-    var bookssRef = firebase.database().ref(currentUser.uid + 'books');
+    var booksRef = firebase.database().ref(currentUser.uid + 'books');
 
     // moviesRef.on('value', function(data) {
         //     var movies = data.val();
@@ -46,27 +46,54 @@ function mediaTracker () {
         //         store.dispatch(addMovie(childData));
     //     });
 
-    moviesRef.on('child_added', function(data) {        
-        store.dispatch(addMovie(data.val()));
+    moviesRef.on('child_added', function (data) {        
+        let current = data.val();
+
+        let movie = {
+            key: data.key,
+            count: current.count,
+            id: current.id,
+            poster: current.poster,
+            released: current.release,
+            runtime: current.runtime,
+            synopsis: current.synopsis,
+            title: current.title
+        }
+        store.dispatch(addMovie(movie));
     });
 
-    moviesRef.on('child_removed', function(data) {
+    moviesRef.on('child_removed', function (data) {
         store.dispatch(delMovie(data.val()));
     });
 
-    tvshowsRef.on('child_added', function(data) {        
-        store.dispatch(addTVShow(data.val()));
+    tvshowsRef.on('child_added', function (data) {      
+        console.log('tvshow child added');
+        let curr = data.val();
+
+        let tvshow = {
+            key: data.key,
+            title: curr.title,
+            count: curr.cont,
+            id: curr.id,
+            episodes: curr.episodes,
+            runtime: curr.length,
+            released: curr.released,
+            poster: curr.poster
+        };
+
+        store.dispatch(addTVShow(tvshow));
     });
 
-    tvshowsRef.on('child_removed', function(data) {
+    tvshowsRef.on('child_removed', function (data) {
+        console.log(data.val());
         store.dispatch(delTVShow(data.val()));
     });
 
-    booksRef.on('child_added', function(data) {        
+    booksRef.on('child_added', function (data) {        
         store.dispatch(addBook(data.val()));
     });
 
-    booksRef.on('child_removed', function(data) {
+    booksRef.on('child_removed', function (data) {
         store.dispatch(delBook(data.val()));
     });
 
@@ -77,14 +104,29 @@ export function addMovieToDB (movie) {
     moviesRef.push(movie);
 }
 
+export function delMovieFromDB (movie) {
+    var movieRef = database.ref(currentUser.uid + 'movies/' + movie.key)
+    movieRef.remove();
+}
+
 export function addTVShowToDB (tvshow) {
     var tvshowsRef = database.ref(currentUser.uid + 'tvshows');
     tvshowsRef.push(tvshow);
 }
 
-export function addBookToDB (movie) {
+export function delTVShowFromDB (tvshow) {
+    var tvshowRef = database.ref(currentUser.uid + 'tvshows/' + tvshow.key);
+    tvshowRef.remove();
+}
+
+export function addBookToDB (book) {
     var booksRef = database.ref( currentUser.uid + 'books');
-    booksRef.push(movie);
+    booksRef.push(book);
+}
+
+export function delBookFromDB (book) {
+    var bookRef = database.ref(currentUser.uid + 'books/' + book.key);
+    bookRef.remove();
 }
 
 export function signIn () {
@@ -96,7 +138,6 @@ export function signIn () {
         }).catch(function(error) {
             console.log(error);
         });
-
 }
 
 export function signOut () {
@@ -113,5 +154,6 @@ firebase.auth().onAuthStateChanged(function(user) {
         currentUser = user;
         myListener = new mediaTracker();
     } else {
+        currentUser = null;
     }
 });

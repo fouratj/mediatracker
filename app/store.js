@@ -22,6 +22,7 @@ const BOOKS_INDEX = "BOOKS_INDEX";
 const UPDATE_BOOKS_INDEX = "UPDATE_BOOKS_INDEX";
 
 const ADD_SEARCH = "ADD_SEARCH";
+const ADD_SEASONS = "ADD_SEASONS";
 
 const initialIndices = {
     movies: 0,
@@ -34,6 +35,7 @@ const initialState = {
   tvshows: [],
   books: [],
   search: [],
+  seasons: [],
   indices: initialIndices
 }
 
@@ -72,6 +74,7 @@ export function updateTVShowsIndex (index) {
     return { type: UPDATE_TVSHOWS_INDEX, index }
 }
 
+// BOOKS
 export function addBook (book) {
     return { type: ADD_BOOK, book }
 }
@@ -90,6 +93,10 @@ export function updateBooksIndex (index) {
 
 export function addSearch (results) {
     return { type: ADD_SEARCH, results}
+}
+
+export function addSeasons (seasons) {
+    return { type: ADD_SEASONS, seasons }
 }
 
 
@@ -130,7 +137,12 @@ export function movies (state = [], action) {
                     title: action.film.title,
                     poster: action.film.poster,
                     released: action.film.released,
-                    id: action.film.id
+                    id: action.film.id,
+                    dateAdded: action.film.dateAdded,
+                    count: action.film.count,
+                    key: action.film.key,
+                    runtime: action.film.runtime,
+                    synopsis: action.film.synopsis
                 }, 
                 ...state
             ]
@@ -146,18 +158,30 @@ export function movies (state = [], action) {
 export function tvshows (state = [], action) {
     switch (action.type) {
         case ADD_TVSHOW: 
-            console.log('ADD_TVSHOW')
             return [
                 {
+                    key: action.tvshow.key,
                     title: action.tvshow.title,
-                    poster: action.tvshow.poster,
+                    count: action.tvshow.count,
+                    id: action.tvshow.id,
+                    episodes: action.tvshow.episodes,
+                    runtime: action.tvshow.runtime,
                     released: action.tvshow.released,
-                    id: action.tvshow.id
+                    poster: action.tvshow.poster
                 },
                 ...state
             ]
         case DEL_TVSHOW:
-            return state.filter(item => (item.title != action.tvshow.title));
+            return state.filter(item => {
+                console.log(item.title, action.tvshow.title);
+                console.log(item.released, action.tvshow.released)
+                if (item.title == action.tvshow.title && item.released == action.tvshow.released) {
+                    console.log('false')
+                    return false;
+                }
+                console.log('true')
+                return true;
+            });
         case RESET_TVSHOWS:
             return [];
         default:
@@ -195,11 +219,24 @@ export function search (state = [], action) {
         case ADD_SEARCH:
             return [
                 ...action.results
-            ]
+            ];
         default:
             return state;
     }
     
+}
+
+export function seasons (state = [], action) {
+    switch(action.type) {
+        case ADD_SEASONS:
+            console.log(action.seasons)
+            return [
+                ...action.seasons
+            ];
+        default:
+            return state;   
+    }
+        
 }
 // /ACTIONS
 
@@ -215,6 +252,7 @@ export function mylifeapp (state = initialState, actions) {
         tvshows: tvshows(state.tvshows, actions),
         books: books(state.books, actions),
         search: search(state.search, actions),
+        seasons: seasons(state.seasons, actions),
         indices: indices(state.indices, actions)
     }
 }

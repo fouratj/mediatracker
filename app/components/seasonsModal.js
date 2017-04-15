@@ -1,5 +1,5 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class SearchElement extends React.Component {
 
@@ -22,32 +22,16 @@ class SearchElement extends React.Component {
         }, 50);
 
         let url = this.props.url;
-        
-        let getFullInfo = $.get(url, { 'target': this.props.result.id}, function (data) {
-                let res = JSON.parse(data);
-                console.log(res)
-                console.log(self.props)
-                if (self.props.type === "tvshows") {
-                    self.props.addSeasons(res)
-                } else {
-                    self.props.add(res);
-                }
-                
-
-                
-                $('img').matchHeight();
-                // $($this[0]).hide();
-                $('#bottomModal').modal('close');
-                $('#seasonsModal').modal('open');
-            });
+        self.props.add(this.props.season);
     }
 
     render () {
+    
         return (
             <li className="collection-item avatar" id={this.props.aKey + 'result'} key={this.props.aKey}>
-                <img alt className="circle" src={this.props.result.poster} />
-                <p className="flow-text"> {this.props.result.title} </p>
-                <p> {this.props.result.released}</p>
+                <img alt className="circle" src={this.props.season.poster} />
+                <p className="flow-text"> {this.props.season.title} </p>
+                <p> {this.props.season.released}</p>
                 <p className="secondary-content">
                     <input type="checkbox" onChange={this.handleChange} id={this.props.aKey} checked={this.state.isChecked} />
                     <label htmlFor={this.props.aKey}></label>
@@ -57,7 +41,7 @@ class SearchElement extends React.Component {
     }
 }
 
-class BottomModal extends React.Component {
+export class SeasonsModal extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -67,34 +51,27 @@ class BottomModal extends React.Component {
         $($this[0]).modal();
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-
-        return true;
-    }
-
     render () {  
-        let results = [];
-        results = this.props.results.map((result, index) => {
-            return  <SearchElement 
-                        url={this.props.url} 
+        let seasons = [];
+        console.log(this.props.seasons)
+        seasons = this.props.seasons.map((season, index) => {
+            return  <SearchElement  
                         checked={false} 
                         add={this.props.add} 
-                        del={this.props.del} 
-                        result={result} 
-                        key={index} 
+                        season={season} 
+                        key={index}
                         aKey={index}
-                        type={this.props.type}
                         addSeasons={this.props.addSeasons} />
         });
         
         return (
-            <div id="bottomModal" className="modal bottom-sheet">
+            <div id="seasonsModal" className="modal bottom-sheet">
                 <div className="modal-content">
-                    <h2 className="center">Search Results</h2>
+                    <h2 className="center">Pick a season</h2>
                     <div className="row">
                         <div className="col s12">
                             <ul className="collection">
-                                {results}
+                                {seasons}
                             </ul>
                         </div>
                     </div>
@@ -104,5 +81,3 @@ class BottomModal extends React.Component {
         )
     }
 }
-
-module.exports = BottomModal;

@@ -2,7 +2,7 @@ import Redux from 'redux';
 import { connect } from 'react-redux';
 import { addMovie, delMovie, addSearch, updateMoviesIndex } from '../store';
 import Movies from '../components/movies';
-import {addMovieToDB} from '../firebase.js';
+import { addMovieToDB, delMovieFromDB } from '../firebase.js';
 
 const getMedia = (state) => {
     return state.movies;
@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(addSearch(results));
     },
     delMovie: (movie) => {
-      dispatch(delMovie(movie))
+      delMovieFromDB(movie);
     },
     updateIndex: (newIndex) => {
       dispatch(updateMoviesIndex(newIndex))

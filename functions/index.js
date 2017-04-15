@@ -43,7 +43,7 @@ exports.searchMovie = functions.https.onRequest((request, response) => {
     }).then(function(body) {
         response.send(body);
     }).catch(function (error) {
-        reject();
+        response.send(error);
     });
 
 });
@@ -58,14 +58,14 @@ exports.getMovie = functions.https.onRequest((request, response) => {
         response.send("Can't send empty string");
     }
 
-    uri = movieDBURI.replace("{id}", request.query.target) + APIKey;
+    uri = movieDBURI.replace("{id}", encodeURIComponent(request.query.target)) + APIKey;
 
     new Promise(function (resolve, reject) {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
         response.send(body);
     }).catch(function (error) {
-        reject();
+        response.send(error);
     });
 
 });
@@ -86,29 +86,31 @@ exports.searchShow = functions.https.onRequest((request, response) => {
     }).then(function(body) {
         response.send(body);
     }).catch(function (error) {
-        reject();
+        response.send(error);
     });
 
 });
 
 exports.getShow = functions.https.onRequest((request, response) => {
-    const tvIDURI = "http://api.themoviedb.org/3/tv/{id}?api_key=";
+    const tvIDURI = "https://api.themoviedb.org/3/tv/{id}?api_key=";
     const APIKey = '83e042991949ef7ee9683a5682d8fd7e';
+    let uri;
 
     if (!request.query.target) {
         response.send("Can't send empty string");
     }
-
-    uri = tvDBURI.replace("{id}", request.query.target) + APIKey;
+    console.log(request.query.target);
+    uri = tvIDURI.replace("{id}", encodeURIComponent(request.query.target)) + APIKey;
 
     new Promise(function (resolve, reject) {
         resolve(sendViaCors(request, response, uri));
     }).then(function(body) {
+        console.log(body);
         response.send(body);
     }).catch(function (error) {
-        reject();
+        response.send(error);
     });
-})
+});
 
 exports.searchBook = functions.https.onRequest((request, response) => {
     let name = request.query.target;
@@ -126,7 +128,7 @@ exports.searchBook = functions.https.onRequest((request, response) => {
     }).then(function(body) {
         response.send(body);
     }).catch(function (error) {
-        reject();
+        response.send(error);
     });
 
 });
