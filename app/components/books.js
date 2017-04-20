@@ -1,26 +1,35 @@
-var React = require('react');
-var Row = require('../components/row');
-var Page = require('../components/page');
-var FAButton = require('../components/FAButton');
-var AddItem = require('../components/addItemModal');
-var BottomModal = require('../components/bottomModal');
+import React from 'react';
+import Page from '../components/page';
+import FAB from '../components/FAButton';
+import { AddItem } from '../components/addItemModal';
+import { BottomModal } from '../components/bottomModal';
+import { store, updateTitle } from '../store';
 
-class Books extends React.Component {
+export default class Books extends React.Component {
+
+    componentDidMount () {
+        store.dispatch(updateTitle('BOOKS'));
+    }
+
     render () {
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchBook';
+        let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getBook';
+
         return (
             <div>
-                <Row>
+                <div className="row">
                     <Page media={this.props.books} del={this.props.delBook} type="books" />
-                </Row>
-                <Row>
-                    <FAButton />
-                </Row>
+                </div>
+                <div className="row">
+                    <FAB />
+                </div>
                 <AddItem add={this.props.addBook} del={this.props.delBook} addSearch={this.props.addSearch} url={url} />
-                <BottomModal add={this.props.addBook} del={this.props.delBook} results={this.props.results} />
+                <BottomModal 
+                    add={this.props.addBook} 
+                    del={this.props.delBook}
+                    url={urlId}
+                    results={this.props.results} />
             </div>
         )
     }
 }
-
-module.exports = Books;

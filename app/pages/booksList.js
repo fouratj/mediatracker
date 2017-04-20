@@ -1,15 +1,8 @@
-// var Redux = require('redux');
 import Redux from 'redux';
-// var ReactRedux = require('react-redux');
-// var connect = ReactRedux.connect;
 import { connect } from 'react-redux';
-// var store = require('../store');
 import { addBook, addSearch, delBook } from '../store';
-// var addBook = store.addBook;
-// var addSearch = store.addSearch;
-// var delBook = store.delBook;
+import { addBookToDB, delBookFromDB } from '../firebase';
 
-// var Books = require('../components/books');
 import Books from '../components/books';
 
 const getMedia = (state) => {
@@ -29,8 +22,21 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addBook: (book) => {
-        dispatch(addBook(book))
+    addBook: (res) => {
+        let images = res.volumeInfo.imageLinks;
+
+        let book = {
+          id: res.id,
+          title: res.volumeInfo.title,
+          pages: res.volumeInfo.pageCount,
+          released: res.volumeInfo.publishedDate,
+          createdBy: res.volumeInfo.authors[0],
+          poster: images.small || images.thumbnail,
+          count: 1,
+          dateAdded: Date.now()
+        };
+
+        addBookToDB(book);
     },
     addSearch: (res) => {
       let results = res.map( book => {
@@ -51,7 +57,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(addSearch(results))
     },
     delBook: (book) => {
-      dispatch(delBook(book))
+      // dispatch(delBook(book))
+      delBookFromDB(book);
     }
   }
 }
@@ -60,5 +67,3 @@ export let booksList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(Books)
-
-// module.exports = booksList;

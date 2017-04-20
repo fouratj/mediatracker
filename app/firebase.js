@@ -1,12 +1,21 @@
 import firebase from 'firebase';
 import admin from 'firebase';
+import https from 'https';
 
-import { store, addMovie, delMovie, addTVShow, delTVShow, addBook, delBook, resetStateOnSignOut } from './store';
+import { store,
+        addMovie, 
+        delMovie,
+        addTVShow,
+        delTVShow,
+        addBook,
+        delBook,
+        resetStateOnSignOut,
+        updateStats } from './store';
+
 import { firebaseData } from './config/init';
 
-let currentUser;
+// let currentUser;
 let myListener;
-
 const config = {
     apiKey: firebaseData.apiKey,
     authDomain: firebaseData.authDomain,
@@ -19,13 +28,16 @@ const config = {
 firebase.initializeApp(config);
 
 var database = firebase.database();
+var auth = firebase.auth();
 
-function mediaTracker () {
-    var moviesRef = firebase.database().ref(currentUser.uid + 'movies');
-    var tvshowsRef = firebase.database().ref(currentUser.uid + 'tvshows');
-    var booksRef = firebase.database().ref(currentUser.uid + 'books');
+function mediaTracker () {    
+    let user = auth.currentUser;
 
-    // moviesRef.on('value', function(data) {
+    let moviesRef = database.ref(user.uid + 'movies');
+    let tvshowsRef = database.ref(user.uid + 'tvshows');
+    let booksRef = database.ref(user.uid + 'books');
+
+    //moviesRef.on('value', function(data) {
         //     var movies = data.val();
         //     resetStateOnSignOut();
         //     for (let movie in movies) {
@@ -44,9 +56,9 @@ function mediaTracker () {
         //         var nameKey = childData.title;
         //         cache[nameKey] = nameKey;
         //         store.dispatch(addMovie(childData));
-    //     });
+    //});
 
-    moviesRef.on('child_added', function (data) {        
+    moviesRef.on('child_added', function (data) {
         let current = data.val();
 
         let movie = {
@@ -54,11 +66,12 @@ function mediaTracker () {
             count: current.count,
             id: current.id,
             poster: current.poster,
-            released: current.release,
+            released: new Date(current.released).getFullYear(),
             runtime: current.runtime,
             synopsis: current.synopsis,
             title: current.title
-        }
+        };
+
         store.dispatch(addMovie(movie));
     });
 
@@ -67,13 +80,12 @@ function mediaTracker () {
     });
 
     tvshowsRef.on('child_added', function (data) {      
-        console.log('tvshow child added');
         let curr = data.val();
 
         let tvshow = {
             key: data.key,
             title: curr.title,
-            count: curr.cont,
+            count: curr.count,
             id: curr.id,
             episodes: curr.episodes,
             runtime: curr.length,
@@ -85,57 +97,90 @@ function mediaTracker () {
     });
 
     tvshowsRef.on('child_removed', function (data) {
-        console.log(data.val());
         store.dispatch(delTVShow(data.val()));
     });
 
-    booksRef.on('child_added', function (data) {        
-        store.dispatch(addBook(data.val()));
+    booksRef.on('child_added', function (data) {  
+        let curr = data.val();
+
+        let book = {
+            key: data.key,
+            title: curr.title,
+            poster: curr.poster,
+            createdBy: curr.createdBy,
+            count: curr.count,
+            id: curr.id,
+            runtime: curr.pages,
+            released: curr.released,
+            dateAdded: curr.dateAdded
+        };   
+
+        store.dispatch(addBook(book));
     });
 
     booksRef.on('child_removed', function (data) {
         store.dispatch(delBook(data.val()));
     });
 
+    // GET STATS
+    user.getToken().then(function(idToken) {
+        let uri = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getStats';
+
+        $.get(uri, { 'target': idToken }, function (data) {
+
+            let stats = {
+                movies: { count: data.movies.count, total: data.movies.total },
+                tvshows: { count: data.tvshows.count, total: data.tvshows.total },
+                books: { count: data.books.count, total: data.books.total }
+            }
+
+            store.dispatch(updateStats(stats));
+        });
+    })
+
+
 }
 
 export function addMovieToDB (movie) {
-    var moviesRef = database.ref( currentUser.uid + 'movies');
+    let user = auth.currentUser;
+    var moviesRef = database.ref( user.uid + 'movies');
     moviesRef.push(movie);
 }
 
 export function delMovieFromDB (movie) {
-    var movieRef = database.ref(currentUser.uid + 'movies/' + movie.key)
+    let user = auth.currentUser;
+    var movieRef = database.ref( user.uid + 'movies/' + movie.key)
     movieRef.remove();
 }
 
 export function addTVShowToDB (tvshow) {
-    var tvshowsRef = database.ref(currentUser.uid + 'tvshows');
+    let user = auth.currentUser;
+    var tvshowsRef = database.ref( user.uid + 'tvshows');
     tvshowsRef.push(tvshow);
 }
 
 export function delTVShowFromDB (tvshow) {
-    var tvshowRef = database.ref(currentUser.uid + 'tvshows/' + tvshow.key);
+    let user = auth.currentUser;
+    var tvshowRef = database.ref( user.uid + 'tvshows/' + tvshow.key);
     tvshowRef.remove();
 }
 
 export function addBookToDB (book) {
-    var booksRef = database.ref( currentUser.uid + 'books');
+    let user = auth.currentUser;
+    var booksRef = database.ref( user.uid + 'books');
     booksRef.push(book);
 }
 
 export function delBookFromDB (book) {
-    var bookRef = database.ref(currentUser.uid + 'books/' + book.key);
+    let user = auth.currentUser;
+    var bookRef = database.ref(user.uid + 'books/' + book.key);
     bookRef.remove();
 }
 
 export function signIn () {
     var provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider)
-        .then(function(result) {
-            currentUser = result.user;
-            console.log(currentUser)
-        }).catch(function(error) {
+        .catch(function(error) {
             console.log(error);
         });
 }
@@ -149,11 +194,9 @@ export function signOut () {
 }
 
 firebase.auth().onAuthStateChanged(function(user) {
-    console.log('authStateChanged')
+    resetStateOnSignOut();
+    
     if (user) {
-        currentUser = user;
         myListener = new mediaTracker();
-    } else {
-        currentUser = null;
     }
 });

@@ -52,3 +52,6 @@ node_modules/
 app/config/init.js
 /app/config/init.js
 /app/config/init
+/functions/init
+/functions/init.js
+functions/init

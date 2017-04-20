@@ -1,5 +1,6 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class SearchElement extends React.Component {
 
@@ -17,7 +18,7 @@ class SearchElement extends React.Component {
         });
                 
         setTimeout(() => {
-            $('img').matchHeight();
+            // $('img').matchHeight();
             $($this[0]).hide();
         }, 50);
 
@@ -25,8 +26,6 @@ class SearchElement extends React.Component {
         
         let getFullInfo = $.get(url, { 'target': this.props.result.id}, function (data) {
                 let res = JSON.parse(data);
-                console.log(res)
-                console.log(self.props)
                 if (self.props.type === "tvshows") {
                     self.props.addSeasons(res)
                 } else {
@@ -35,7 +34,7 @@ class SearchElement extends React.Component {
                 
 
                 
-                $('img').matchHeight();
+                // $('img').matchHeight();
                 // $($this[0]).hide();
                 $('#bottomModal').modal('close');
                 $('#seasonsModal').modal('open');
@@ -57,7 +56,7 @@ class SearchElement extends React.Component {
     }
 }
 
-class BottomModal extends React.Component {
+export class BottomModal extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -68,7 +67,6 @@ class BottomModal extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-
         return true;
     }
 
@@ -104,5 +102,3 @@ class BottomModal extends React.Component {
         )
     }
 }
-
-module.exports = BottomModal;

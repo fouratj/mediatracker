@@ -1,8 +1,6 @@
 import {Redux, createStore } from 'redux';
 import { ReactRedux, connect } from 'react-redux';
 
-
-
 const ADD_MOVIE = "ADD_MOVIE";
 const DEL_MOVIE = "DEL_MOVIE";
 const RESET_MOVIES = "RESET_MOVIE";
@@ -24,19 +22,34 @@ const UPDATE_BOOKS_INDEX = "UPDATE_BOOKS_INDEX";
 const ADD_SEARCH = "ADD_SEARCH";
 const ADD_SEASONS = "ADD_SEASONS";
 
+const UPDATE_STATS = "UPDATE_STATS";
+const UPDATE_TITLE = "UPDATE_TITLE";
+
 const initialIndices = {
     movies: 0,
     tvshows: 0,
     books: 0
-}
+};
+
+const initialStats = {
+    movies: {count: 0, total: 0},
+    tvshows: {count: 0, total: 0},
+    books: {count: 0, total: 0}
+};
 
 const initialState = {
   movies: [],
   tvshows: [],
   books: [],
-  search: [],
-  seasons: [],
-  indices: initialIndices
+  search: [], //deploys search results
+  seasons: [], //deploys additional season search results
+  indices: initialIndices,
+  stats: initialStats,
+  title: ''
+};
+
+export function updateTitle (title) {
+    return { type: UPDATE_TITLE, title}
 }
 
 //MOVIES
@@ -99,7 +112,9 @@ export function addSeasons (seasons) {
     return { type: ADD_SEASONS, seasons }
 }
 
-
+export function updateStats (stats) {
+    return { type: UPDATE_STATS, stats}
+}
 
 export function indices (state = initialIndices, action) {
 
@@ -109,23 +124,36 @@ export function indices (state = initialIndices, action) {
                 movies: action.index,
                 tvshows: state.tvshows,
                 books: state.books
-            }
+            };
         case UPDATE_TVSHOWS_INDEX:
             return {
                 movies: state.movies,
                 tvshows: action.index,
                 books: state.books
-            }
+            };
         case UPDATE_BOOKS_INDEX:
             return {
                 movies: state.movies,
                 tvshows: state.tvshows,
                 books: action.index
-            }
+            };
         default:
             return state;
     }
             
+}
+
+export function stats (state = initialStats, action) {
+    switch (action.type) {
+        case UPDATE_STATS:
+            return {
+                movies: action.stats.movies,
+                tvshows: action.stats.tvshows,
+                books: action.stats.books
+            }
+        default:
+            return state;
+    }
 }
 
 // ACTIONS
@@ -173,13 +201,9 @@ export function tvshows (state = [], action) {
             ]
         case DEL_TVSHOW:
             return state.filter(item => {
-                console.log(item.title, action.tvshow.title);
-                console.log(item.released, action.tvshow.released)
                 if (item.title == action.tvshow.title && item.released == action.tvshow.released) {
-                    console.log('false')
                     return false;
                 }
-                console.log('true')
                 return true;
             });
         case RESET_TVSHOWS:
@@ -192,16 +216,15 @@ export function tvshows (state = [], action) {
 export function books (state = [], action) {
     switch (action.type) {
         case ADD_BOOK: 
-        return [
-            {
-                title: action.book.title,
-                poster: action.book.poster,
-                released: action.book.released,
-                id: action.book.id
-            },
-            ...state
-        ]
-            return state;
+            return [
+                {
+                    title: action.book.title,
+                    poster: action.book.poster,
+                    released: action.book.released,
+                    id: action.book.id
+                },
+                ...state
+            ]
         case DEL_BOOK:
             return state
                         .filter(item => ( item.title != action.book.title ))
@@ -229,7 +252,6 @@ export function search (state = [], action) {
 export function seasons (state = [], action) {
     switch(action.type) {
         case ADD_SEASONS:
-            console.log(action.seasons)
             return [
                 ...action.seasons
             ];
@@ -237,6 +259,15 @@ export function seasons (state = [], action) {
             return state;   
     }
         
+}
+
+export function title (state = '', action ) {
+    switch(action.type) {
+        case UPDATE_TITLE:
+            return action.title;
+        default:
+            return state;
+    }
 }
 // /ACTIONS
 
@@ -253,7 +284,9 @@ export function mylifeapp (state = initialState, actions) {
         books: books(state.books, actions),
         search: search(state.search, actions),
         seasons: seasons(state.seasons, actions),
-        indices: indices(state.indices, actions)
+        indices: indices(state.indices, actions),
+        stats: stats(state.stats, actions),
+        title: title(state.title, actions)
     }
 }
 

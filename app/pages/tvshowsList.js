@@ -81,5 +81,3 @@ export let tvshowsList = connect(
     mapStateToProps,
     mapDispatchToProps
 )(tvshows)
-
-// module.exports = tvshowsList;

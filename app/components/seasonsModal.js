@@ -41,7 +41,7 @@ class SearchElement extends React.Component {
     }
 }
 
-export class SeasonsModal extends React.Component {
+export default class SeasonsModal extends React.Component {
     constructor(props) {
         super(props);
     }
