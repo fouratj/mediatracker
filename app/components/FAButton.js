@@ -1,8 +1,7 @@
-var React = require('react');
-var ReactRouter = require('react-router');
-var Link = ReactRouter.Link;
+import React from 'react';
+import { Link } from 'react-router';
 
-class FAB extends React.Component {
+export default class FAB extends React.Component {
     render () {
         return (
             <div className="fixed-action-btn">
@@ -13,5 +12,3 @@ class FAB extends React.Component {
         )
     }
 }
-
-module.exports = FAB;

@@ -1,31 +1,33 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom'
 
 // COMPONENTS
-var Page = require('../components/page');
-var FAButton = require('../components/FAButton'); //Fixed Action Button
-var AddItem = require('../components/addItemModal'); //MODAL for adding movie
-var Row = require('../components/row');
-var BottomModal = require('./bottomModal');
-var SeasonsModal = require('./seasonsModal');
-var Seasons = SeasonsModal.SeasonsModal;
+import Page from '../components/page';
+import FAB from '../components/FAButton';
+import SeasonsModal from './seasonsModal';
+import { BottomModal } from './bottomModal';
+import { AddItem } from '../components/addItemModal';
+import { store, updateTitle } from '../store';
 // /COMPONENTS
 
+export default class TVShows extends React.Component {
 
-class TVShows extends React.Component {
+    componentDidMount () {
+        store.dispatch(updateTitle("TVSHOWS"));
+    }
     render () {
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchShow';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getShow';
 
         return (
             <div>
-                <Row>
+                <div className="row">
                     <Page media={this.props.tvshows} del={this.props.delTVShow} type="tvshows" />
-                </Row>
+                </div>
 
-                <Row>
-                    <FAButton />
-                </Row>
+                <div className="row">
+                    <FAB />
+                </div>
 
                 <AddItem add={this.props.addTVShow} del={this.props.delTVShow} addSearch={this.props.addSearch} url={url} />
                 
@@ -37,7 +39,7 @@ class TVShows extends React.Component {
                     addSeasons={this.props.addSeasons}
                     results={this.props.results} />
 
-                <Seasons
+                <SeasonsModal
                     add={this.props.addTVShow}
                     
                     seasons={this.props.seasons} />
@@ -45,5 +47,3 @@ class TVShows extends React.Component {
         )
     }
 };
-
-module.exports = TVShows;

@@ -5,7 +5,7 @@ class CardImage extends React.Component {
     render () {
         return (
             <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator responsive-img" src={this.props.imageURL} />
+                <img className="activator" src={this.props.imageURL} />
             </div>
         )
     }
@@ -17,7 +17,8 @@ class CardContent extends React.Component {
             <div className="card-content" style={{padding: '0px'}}>
                 <ul className="collection with-header" style={{margin: '0px'}}>
                     <li className="collection-item active center-align">
-                        <p style={{whiteSpace: 'nowrap'}}>{this.props.title}</p></li>
+                        <p style={{whiteSpace: 'nowrap'}}>{this.props.title}</p>
+                    </li>
                     <li className="collection-item center-align">{this.props.released}</li>
                 </ul>
             </div>
@@ -32,6 +33,7 @@ class CardReveal extends React.Component {
     }
 
     render () {
+        
         return (
             <div className="card-reveal">
                 <div className="row">
@@ -46,7 +48,7 @@ class CardReveal extends React.Component {
                         
                     </div>
                     <div className="col s12">
-                        You've watched it X times.
+                        You've watched it {this.props.item.count} times.
                     </div>
                     <div className="col s12" style={{position: 'fixed', bottom: '0px'}}>
                         <div className="col s6">

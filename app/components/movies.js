@@ -1,14 +1,21 @@
-var React = require('react');
+import React from 'react';
+
 // COMPONENTS
-var Page = require('./page');
-var FAButton = require('./FAButton'); //Fixed Action Button
-var AddItem = require('./addItemModal'); //MODAL for adding movie
-var BottomModal = require('./bottomModal');
+import Page from './page';
+import FAB from './FAButton';
+import { AddItem } from './addItemModal';
+import { BottomModal } from './bottomModal';
+import { store, updateTitle } from '../store';
 // /COMPONENTS
 
-class Movies extends React.Component {
+export default class Movies extends React.Component {
+
+    componentDidMount() {
+        store.dispatch(updateTitle("MOVIES"))
+    }
 
     render () {
+        
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchMovie';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getMovie';
         return (
@@ -21,7 +28,7 @@ class Movies extends React.Component {
                     updateIndex={this.props.updateIndex}
                     type="movies" />
 
-                <FAButton />
+                <FAB />
 
                 <AddItem 
                     add={this.props.addMovie} 
@@ -37,6 +44,4 @@ class Movies extends React.Component {
             </div>
         )
     }
-};
-
-module.exports = Movies;
+}

@@ -53,7 +53,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           poster: posterPath + movie.poster_path
         }
       });
-
       dispatch(addSearch(results));
     },
     delMovie: (movie) => {

@@ -53,18 +53,10 @@ class Page extends React.Component {
         return (
             <div>
                 {items}
-                
             </div>
         )
     }
 
-    componentDidMount () {
-        // var $this = $(ReactDOM.findDOMNode(this));
-        $('img').matchHeight();
-    }
-
-    componentDidUpdate () {        
-    }
 }
 
 module.exports = Page;

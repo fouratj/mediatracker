@@ -5,16 +5,18 @@ import Home from '../pages/home';
 import { tvshowsList } from '../pages/tvshowsList';
 import { booksList } from '../pages/booksList';
 import { moviesList } from '../pages/movieList';
-import { Stats } from '../pages/stats';
+import { statsList } from '../pages/statsList';
 
 export let routes = (
     <Router history={hashHistory}>
         <Route path='/' component={Home}>
-            <IndexRoute />
-            <Route path='/movies' component={moviesList} />
+            <Route path='/movies' component={moviesList}>
+                <Route path='/list' />
+                <Route path='/chart' />
+            </Route>
             <Route path='/tvshows' component={tvshowsList} />
             <Route path='/books' component={booksList} />
-            <Route path='/stats' component={Stats} />
+            <Route path='/stats' component={statsList} />
         </Route>
     </Router>
 );

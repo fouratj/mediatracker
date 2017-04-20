@@ -1,7 +1,7 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-class AddItem extends React.Component { 
+export class AddItem extends React.Component { 
     componentDidMount() {
         var self = this;
         var $this = $(ReactDOM.findDOMNode(this));
@@ -52,5 +52,3 @@ class AddItem extends React.Component {
         )
     }
 }
-
-module.exports = AddItem;
