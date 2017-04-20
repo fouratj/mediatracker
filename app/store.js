@@ -159,19 +159,19 @@ export function stats (state = initialStats, action) {
         case UPDATE_MOVIE_STATS:
             return {
                 movies: action.stats.movies,
-                tvshows: state.stats.tvshows,
-                books: state.stats.books
+                tvshows: state.tvshows,
+                books: state.books
             }
         case UPDATE_TVSHOW_STATS:
             return {
-                movies: state.stats.movies,
+                movies: state.movies,
                 tvshows: action.stats.tvshows,
-                books: state.stats.books
+                books: state.books
             }
         case UPDATE_BOOK_STATS:
             return {
-                movies: state.stats.movies,
-                tvshows: state.stats.tvshows,
+                movies: state.movies,
+                tvshows: state.tvshows,
                 books: action.stats.books
             }
         default:

@@ -10,7 +10,9 @@ import { store,
         addBook,
         delBook,
         resetStateOnSignOut,
-        updateStats } from './store';
+        updateMovieStats,
+        updateShowStats,
+        updateBookStats } from './store';
 
 import { firebaseData } from './config/init';
 
@@ -138,7 +140,7 @@ function mediaTracker () {
         });
 
         $.get(showURI, { 'target': idToken }, function (data) {
-
+            console.log(data)
             let stats = {
                 tvshows: { count: data.tvshows.count, total: data.tvshows.total }
             }
@@ -147,7 +149,7 @@ function mediaTracker () {
         });
 
         $.get(movieURI, { 'target': idToken }, function (data) {
-
+            
             let stats = {
                 movies: { count: data.movies.count, total: data.movies.total }
             }
