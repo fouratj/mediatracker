@@ -54,9 +54,13 @@ app/config/init.js
 /app/config/init
 /functions/init
 /functions/init.js
+
 functions/init
 /functions/init.json
 functions/init.json
 functions/init
 /functions/init
 .init
+
+functions/init
+

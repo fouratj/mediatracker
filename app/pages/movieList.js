@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addMovie: (res) => {
         let posterPath = "https://image.tmdb.org/t/p/w300";
-
         let movie = {
             id: res.id,
             poster: posterPath + res.poster_path,
@@ -38,7 +37,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             synopsis: res.overview,
             count: 1,
             createdBy: '',
-            dateAdded: Date.now()
+            dateAdded: Date.now(),
+            genre: res.genres
         };
 
         addMovieToDB(movie);
@@ -53,6 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           poster: posterPath + movie.poster_path
         }
       });
+
       dispatch(addSearch(results));
     },
     delMovie: (movie) => {

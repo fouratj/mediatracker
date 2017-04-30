@@ -22,9 +22,13 @@ const UPDATE_BOOKS_INDEX = "UPDATE_BOOKS_INDEX";
 const ADD_SEARCH = "ADD_SEARCH";
 const ADD_SEASONS = "ADD_SEASONS";
 
+
 const UPDATE_MOVIE_STATS = "UPDATE_MOVIE_STATS";
 const UPDATE_BOOK_STATS = "UPDATE_BOOK_STATS";
 const UPDATE_TVSHOW_STATS = "UPDATE_TVSHOW_STATS";
+
+
+const UPDATE_STATS = "UPDATE_STATS";
 
 const UPDATE_TITLE = "UPDATE_TITLE";
 
@@ -126,6 +130,10 @@ export function updateShowStats (stats) {
 export function updateBookStats (stats) {
     return { type: UPDATE_BOOK_STATS, stats}
 }
+export function updateStats (stats) {
+    return { type: UPDATE_STATS, stats}
+
+}
 
 export function indices (state = initialIndices, action) {
 
@@ -172,6 +180,13 @@ export function stats (state = initialStats, action) {
             return {
                 movies: state.movies,
                 tvshows: state.tvshows,
+                books: action.stats.books
+            }
+        case UPDATE_STATS:
+            return {
+                movies: action.stats.movies,
+                tvshows: action.stats.tvshows,
+
                 books: action.stats.books
             }
         default:

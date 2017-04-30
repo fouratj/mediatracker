@@ -140,7 +140,6 @@ function mediaTracker () {
         });
 
         $.get(showURI, { 'target': idToken }, function (data) {
-            console.log(data)
             let stats = {
                 tvshows: { count: data.tvshows.count, total: data.tvshows.total }
             }
