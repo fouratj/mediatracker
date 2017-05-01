@@ -10,7 +10,8 @@ import { statsList } from '../pages/statsList';
 export let routes = (
     <Router history={hashHistory}>
         <Route path='/' component={Home}>
-            <Route path='/movies' component={moviesList}>
+            <Route path='/movies'>
+                <Route path='/cards' component={moviesList}/>
                 <Route path='/list' />
                 <Route path='/chart' />
             </Route>

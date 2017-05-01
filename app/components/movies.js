@@ -1,5 +1,4 @@
 import React from 'react';
-
 // COMPONENTS
 import Page from './page';
 import FAB from './FAButton';
@@ -15,9 +14,9 @@ export default class Movies extends React.Component {
     }
 
     render () {
-        console.log(this.props);
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchMovie';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getMovie';
+
         return (
             <div className="row">
                 

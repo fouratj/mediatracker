@@ -2,7 +2,6 @@ import React from 'react';
 import { Provider } from 'react-redux';
 
 import { NavWrapper } from './navWrapper';
-
 import { store } from '../store';
 
 export default class Home extends React.Component {
