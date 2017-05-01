@@ -36,7 +36,7 @@ export class AddItem extends React.Component {
 
                         <div className="row">
                             <div className="input-field col s12">
-                                <label className="active" htmlFor="textarea1">Add item</label>
+                                <label className="active" htmlFor="textarea1">{this.props.message}</label>
                                 <input type="text" className="form-control" id="textarea1" autoComplete="off"></input>
                             </div>
                         </div>

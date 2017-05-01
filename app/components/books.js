@@ -23,7 +23,12 @@ export default class Books extends React.Component {
                 <div className="row">
                     <FAB />
                 </div>
-                <AddItem add={this.props.addBook} del={this.props.delBook} addSearch={this.props.addSearch} url={url} />
+                <AddItem 
+                    add={this.props.addBook} 
+                    del={this.props.delBook} 
+                    addSearch={this.props.addSearch} 
+                    url={url}
+                    message="Search Books" />
                 <BottomModal 
                     add={this.props.addBook} 
                     del={this.props.delBook}

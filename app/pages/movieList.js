@@ -16,11 +16,16 @@ const getIndex = (state) => {
   return state.indices.movies;
 }
 
+const getStats = (state) => {
+  return state.stats.movies;
+}
+
 const mapStateToProps = (state, ownProps) => {
   return {
     movies: getMedia(state),
     results: getResults(state),
-    index: getIndex(state)
+    index: getIndex(state),
+    stats: getStats(state)
   }
 }
 

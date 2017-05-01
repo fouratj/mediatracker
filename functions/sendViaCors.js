@@ -21,6 +21,7 @@ function sendViaCors (request, response, uri) {
                 }
 
                 https.get(uri, onFinish);
+                
             } else {
                 resolve('success');
             }

@@ -11,11 +11,11 @@ import { store, updateTitle } from '../store';
 export default class Movies extends React.Component {
 
     componentDidMount() {
-        store.dispatch(updateTitle("MOVIES"))
+        store.dispatch(updateTitle("MOVIES"));
     }
 
     render () {
-        
+        console.log(this.props);
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchMovie';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getMovie';
         return (
@@ -33,7 +33,8 @@ export default class Movies extends React.Component {
                 <AddItem 
                     add={this.props.addMovie} 
                     addSearch={this.props.addSearch} 
-                    url={url} />
+                    url={url} 
+                    message="Search Movie"/>
 
                 <BottomModal 
                     add={this.props.addMovie} 

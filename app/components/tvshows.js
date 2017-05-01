@@ -29,7 +29,12 @@ export default class TVShows extends React.Component {
                     <FAB />
                 </div>
 
-                <AddItem add={this.props.addTVShow} del={this.props.delTVShow} addSearch={this.props.addSearch} url={url} />
+                <AddItem 
+                    add={this.props.addTVShow}
+                    del={this.props.delTVShow} 
+                    addSearch={this.props.addSearch} 
+                    url={url}
+                    message="Search TV Shows" />
                 
                 <BottomModal 
                     type="tvshows"

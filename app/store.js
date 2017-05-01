@@ -119,6 +119,8 @@ export function addSeasons (seasons) {
     return { type: ADD_SEASONS, seasons }
 }
 
+
+
 export function updateMovieStats (stats) {
     return { type: UPDATE_MOVIE_STATS, stats}
 }
@@ -186,7 +188,6 @@ export function stats (state = initialStats, action) {
             return {
                 movies: action.stats.movies,
                 tvshows: action.stats.tvshows,
-
                 books: action.stats.books
             }
         default:
