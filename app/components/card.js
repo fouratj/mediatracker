@@ -40,8 +40,7 @@ class CardReveal extends React.Component {
                     <div className="col s12">
                         <span className="card-title grey-text text-darken-4 valign-wrapper"
                                 style={{fontSize: 16 + 'px'}}>
-                            {this.props.item.title}
-                            
+                            {this.props.item.title}  
                         </span>
                     </div>
                     <div className="col s12">

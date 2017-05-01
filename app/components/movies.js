@@ -14,9 +14,13 @@ export default class Movies extends React.Component {
     }
 
     render () {
+        console.log(this.props)
+        let asList = false;
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchMovie';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getMovie';
-
+        if (this.props.route.path.includes("list")) {
+            asList = true;
+        }
         return (
             <div className="row">
                 
@@ -25,7 +29,8 @@ export default class Movies extends React.Component {
                     del={this.props.delMovie}
                     index={this.props.index} 
                     updateIndex={this.props.updateIndex}
-                    type="movies" />
+                    type="movies"
+                    list={asList} />
 
                 <FAB />
 

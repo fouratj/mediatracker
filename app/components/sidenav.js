@@ -54,12 +54,13 @@ export default class SideNav extends React.Component {
                     <li className="no-padding">
                         <ul className="collapsible" data-collapsible="expandable">
                             <li>
-                                <a className="collapsible-header">
-                                    <i className="material-icons right">movie</i><span style={{opacity: '0'}}>|</span>
-                                </a>
+                                <Link to="/movies" className="collapsible-header">     
+                                    <i className="material-icons right">movie</i><span style={{opacity: '0'}}>|</span> 
+                                </Link>
                                 <div className="collapsible-body teal darken-1">
                                     <ul>
-                                        <li><Link to="/movies"><i className="material-icons right">list</i></Link></li>
+                                        <li><Link to="/movies/cards"><i className="material-icons right">list</i></Link></li>
+                                        <li><Link to="/movies/list"><i className="material-icons right">format_list_numbered</i></Link></li>
                                         <li><Link to=""><i className="material-icons right">show_chart</i></Link></li>
                                         <li><Link to=""><i className="material-icons right">info</i></Link></li>
                                     </ul>

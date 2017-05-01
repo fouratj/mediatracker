@@ -11,8 +11,8 @@ export let routes = (
     <Router history={hashHistory}>
         <Route path='/' component={Home}>
             <Route path='/movies'>
-                <Route path='/cards' component={moviesList}/>
-                <Route path='/list' />
+                <Route path='/movies/cards' component={moviesList} />
+                <Route path='/movies/list' component={moviesList} />
                 <Route path='/chart' />
             </Route>
             <Route path='/tvshows' component={tvshowsList} />
@@ -20,4 +20,4 @@ export let routes = (
             <Route path='/stats' component={statsList} />
         </Route>
     </Router>
-);
+)

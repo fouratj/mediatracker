@@ -1,7 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Card = require('./card');
-var store = require('../store');
+// var React = require('react');
+import React from 'react';
+import Card from './card';
+// var Card = require('./card');
+import Collection from './collection';
 
 class Button extends React.Component {
     constructor(props) {
@@ -46,10 +47,16 @@ class Button extends React.Component {
 class Page extends React.Component {
     
     render () {
-        var items = this.props.media.map((media, index) => {
-            return <Card key={index} item={media} del={this.props.del} classType={this.props.type} />
-        });
-
+        var items;
+        console.log(this.props.list);
+        if (!this.props.list) {
+            items = this.props.media.map((media, index) => {
+                return <Card key={index} item={media} del={this.props.del} classType={this.props.type} />
+            });
+        } else {
+            items = <Collection items={this.props.media} />
+        }
+        
         return (
             <div>
                 {items}
@@ -59,4 +66,4 @@ class Page extends React.Component {
 
 }
 
-module.exports = Page;
+export default Page;
