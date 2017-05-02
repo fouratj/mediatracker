@@ -47,8 +47,8 @@ class Button extends React.Component {
 class Page extends React.Component {
     
     render () {
-        var items;
-        console.log(this.props.list);
+        let items;
+
         if (!this.props.list) {
             items = this.props.media.map((media, index) => {
                 return <Card key={index} item={media} del={this.props.del} classType={this.props.type} />

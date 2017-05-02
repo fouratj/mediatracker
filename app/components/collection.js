@@ -2,9 +2,8 @@ import React from  'react';
 
 export default class Collection extends React.Component {
     render () {
-
-        var items = this.props.items.map((item, index) => {
-            return <li className="collection-item avatar">
+        let items = this.props.items.map((item, index) => {
+            return <li className="collection-item avatar" key={index}>
                         <img src={item.poster} alt={item.title} className="circle" />
                         <span className="title">{item.title}</span>
                         <a href="#!" className="secondary-content"><i className="material-icons">grade</i></a>
@@ -13,9 +12,11 @@ export default class Collection extends React.Component {
 
         return (
             <div className="row">
-                <ul className="collection">
-                    {items}
-                </ul>
+                <div className="col s12">
+                    <ul className="collection">
+                        {items}
+                    </ul>
+                </div>
             </div>
         )
     }

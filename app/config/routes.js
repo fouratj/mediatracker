@@ -6,6 +6,7 @@ import { tvshowsList } from '../pages/tvshowsList';
 import { booksList } from '../pages/booksList';
 import { moviesList } from '../pages/movieList';
 import { statsList } from '../pages/statsList';
+import { titleWrapper } from '../pages/titleWrapper';
 
 export let routes = (
     <Router history={hashHistory}>
