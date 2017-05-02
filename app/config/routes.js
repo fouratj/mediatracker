@@ -11,13 +11,19 @@ import { titleWrapper } from '../pages/titleWrapper';
 export let routes = (
     <Router history={hashHistory}>
         <Route path='/' component={Home}>
-            <Route path='/movies'>
-                <Route path='/movies/cards' component={moviesList} />
-                <Route path='/movies/list' component={moviesList} />
-                <Route path='/chart' />
-            </Route>
-            <Route path='/tvshows' component={tvshowsList} />
-            <Route path='/books' component={booksList} />
+            <Route path='/movies' component={titleWrapper} />>
+            <Route path='/movies/cards' component={moviesList} />
+            <Route path='/movies/list' component={moviesList} />
+            <Route path='/movies/chart' />
+
+            <Route path='/tvshows' component={titleWrapper} />
+            <Route path='/tvshows/cards' component={tvshowsList} />
+            <Route path='/tvshows/list' component={tvshowsList} />
+
+            <Route path='/books' component={titleWrapper} />
+            <Route path='/books/cards' component={booksList} />
+            <Route path='/books/list' component={booksList} />
+
             <Route path='/stats' component={statsList} />
         </Route>
     </Router>

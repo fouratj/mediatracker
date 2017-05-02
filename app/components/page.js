@@ -1,7 +1,5 @@
-// var React = require('react');
 import React from 'react';
 import Card from './card';
-// var Card = require('./card');
 import Collection from './collection';
 
 class Button extends React.Component {

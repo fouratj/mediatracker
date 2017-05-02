@@ -13,6 +13,7 @@ import { store, updateTitle } from '../store';
 export default class TVShows extends React.Component {
 
     componentDidMount () {
+        console.log("titleUpdated TV Shows");
         store.dispatch(updateTitle("TVSHOWS"));
     }
     render () {

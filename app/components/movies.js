@@ -10,6 +10,7 @@ import { store, updateTitle } from '../store';
 export default class Movies extends React.Component {
 
     componentDidMount() {
+        console.log("titleUpdated Movies");
         store.dispatch(updateTitle("MOVIES"));
     }
 

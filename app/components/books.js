@@ -8,6 +8,7 @@ import { store, updateTitle } from '../store';
 export default class Books extends React.Component {
 
     componentDidMount () {
+        console.log("titleUpdated Books");
         store.dispatch(updateTitle('BOOKS'));
     }
 
