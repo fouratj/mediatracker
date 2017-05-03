@@ -18,6 +18,7 @@ import { firebaseData } from './config/init';
 
 // let currentUser;
 let myListener;
+
 const config = {
     apiKey: firebaseData.apiKey,
     authDomain: firebaseData.authDomain,
@@ -73,7 +74,7 @@ function mediaTracker () {
             synopsis: current.synopsis,
             title: current.title
         };
-
+        console.log('movie added')
         store.dispatch(addMovie(movie));
     });
 

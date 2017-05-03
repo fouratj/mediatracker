@@ -7,6 +7,7 @@ import { booksList } from '../pages/booksList';
 import { moviesList } from '../pages/movieList';
 import { statsList } from '../pages/statsList';
 import { titleWrapper } from '../pages/titleWrapper';
+import { chartWrapper } from '../pages/chartWrapper';
 
 export let routes = (
     <Router history={hashHistory}>
@@ -14,16 +15,17 @@ export let routes = (
             <Route path='/movies' component={titleWrapper} />>
             <Route path='/movies/cards' component={moviesList} />
             <Route path='/movies/list' component={moviesList} />
-            <Route path='/movies/chart' />
+            <Route path='/movies/chart' components={chartWrapper} />
 
             <Route path='/tvshows' component={titleWrapper} />
             <Route path='/tvshows/cards' component={tvshowsList} />
             <Route path='/tvshows/list' component={tvshowsList} />
+            <Route path='/tvshows/chart' component={tvshowsList} />
 
             <Route path='/books' component={titleWrapper} />
             <Route path='/books/cards' component={booksList} />
             <Route path='/books/list' component={booksList} />
-
+            <Route path='/books/chart' component={tvshowsList} />
             <Route path='/stats' component={statsList} />
         </Route>
     </Router>

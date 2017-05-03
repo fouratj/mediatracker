@@ -21,7 +21,6 @@ export default class Title extends React.Component {
     }
 
     componentWillUnmount () {
-        console.log(this.props);
-        console.log('unmount');
+        
     }
 }

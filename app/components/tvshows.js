@@ -13,17 +13,24 @@ import { store, updateTitle } from '../store';
 export default class TVShows extends React.Component {
 
     componentDidMount () {
-        console.log("titleUpdated TV Shows");
+        
         store.dispatch(updateTitle("TVSHOWS"));
     }
     render () {
+        let asList = false;
+
         let url = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/searchShow';
         let urlId = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getShow';
+        if (this.props.route.path.includes("list")) asList = true;
 
         return (
             <div>
                 <div className="row">
-                    <Page media={this.props.tvshows} del={this.props.delTVShow} type="tvshows" />
+                    <Page 
+                        media={this.props.tvshows} 
+                        del={this.props.delTVShow} 
+                        type="tvshows" 
+                        list={asList} />
                 </div>
 
                 <div className="row">
@@ -35,7 +42,8 @@ export default class TVShows extends React.Component {
                     del={this.props.delTVShow} 
                     addSearch={this.props.addSearch} 
                     url={url}
-                    message="Search TV Shows" />
+                    message="Search TV Shows" 
+                     />
                 
                 <BottomModal 
                     type="tvshows"
