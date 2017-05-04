@@ -78,7 +78,7 @@ export default class SideNav extends React.Component {
                                     <ul>
                                         <li><Link to="/tvshows/cards"><i className="material-icons right">list</i></Link></li>
                                         <li><Link to="/tvshows/list"><i className="material-icons right">format_list_numbered</i></Link></li>
-                                        <li><Link to="/tvshows/list"><i className="material-icons right">show_chart</i></Link></li>
+                                        <li><Link to="/tvshows/chart"><i className="material-icons right">show_chart</i></Link></li>
                                         <li><Link to="/"><i className="material-icons right">info</i></Link></li>
                                     </ul>
                                 </div>
@@ -95,7 +95,7 @@ export default class SideNav extends React.Component {
                                 <div className="collapsible-body teal">
                                     <ul>
                                         <li><Link to="/books/cards"><i className="material-icons right">list</i></Link></li>
-                                        <li><Link to=""><i className="material-icons right">show_chart</i></Link></li>
+                                        <li><Link to="/books/chart"><i className="material-icons right">show_chart</i></Link></li>
                                         <li><Link to=""><i className="material-icons right">info</i></Link></li>
                                     </ul>
                                 </div>

@@ -20,12 +20,12 @@ export let routes = (
             <Route path='/tvshows' component={titleWrapper} />
             <Route path='/tvshows/cards' component={tvshowsList} />
             <Route path='/tvshows/list' component={tvshowsList} />
-            <Route path='/tvshows/chart' component={tvshowsList} />
+            <Route path='/tvshows/chart' component={chartWrapper} />
 
             <Route path='/books' component={titleWrapper} />
             <Route path='/books/cards' component={booksList} />
             <Route path='/books/list' component={booksList} />
-            <Route path='/books/chart' component={tvshowsList} />
+            <Route path='/books/chart' component={chartWrapper} />
             <Route path='/stats' component={statsList} />
         </Route>
     </Router>

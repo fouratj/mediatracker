@@ -3,7 +3,6 @@ var admin = require('firebase-admin');
 var sendViaCors = require('./sendViaCors');
 
 var serviceAccount = require("./init.json");
-var serviceAccount = require("./mylifetracker-b6177-firebase-adminsdk-qboy9-40e19e2986.json");
 
 
 var App = admin.initializeApp({

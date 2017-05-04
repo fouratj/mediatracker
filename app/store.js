@@ -56,16 +56,16 @@ const initialState = {
 };
 
 export function updateTitle (title) {
-    return { type: UPDATE_TITLE, title}
+    return { type: UPDATE_TITLE, title: title}
 }
 
 //MOVIES
 export function addMovie (film) {
-    return { type: ADD_MOVIE, film }
+    return { type: ADD_MOVIE, film: film }
 }
 
 export function delMovie (film) {
-    return {type: DEL_MOVIE, film}
+    return {type: DEL_MOVIE, film: film}
 }
 
 export function resetMovies () {
@@ -73,17 +73,17 @@ export function resetMovies () {
 }
 
 export function updateMoviesIndex (index) {
-    return { type: UPDATE_MOVIES_INDEX, index }
+    return { type: UPDATE_MOVIES_INDEX, index: index }
 }
 // /MOVIES
 
 // TVSHOWS
 export function addTVShow (tvshow) {
-    return { type: ADD_TVSHOW, tvshow }
+    return { type: ADD_TVSHOW, tvshow: tvshow }
 }
 
 export function delTVShow (tvshow) {
-    return { type: DEL_TVSHOW, tvshow }
+    return { type: DEL_TVSHOW, tvshow: tvshow }
 }
 
 export function resetTVshows () {
@@ -91,16 +91,16 @@ export function resetTVshows () {
 }
 
 export function updateTVShowsIndex (index) {
-    return { type: UPDATE_TVSHOWS_INDEX, index }
+    return { type: UPDATE_TVSHOWS_INDEX, index: index }
 }
 
 // BOOKS
 export function addBook (book) {
-    return { type: ADD_BOOK, book }
+    return { type: ADD_BOOK, book: book }
 }
 
 export function delBook (book) {
-    return { type: DEL_BOOK, book }
+    return { type: DEL_BOOK, book: book }
 }
 
 export function resetBooks () {
@@ -108,32 +108,32 @@ export function resetBooks () {
 }
 
 export function updateBooksIndex (index) {
-    return { type: UPDATE_BOOKS_INDEX, index }
+    return { type: UPDATE_BOOKS_INDEX, index: index }
 }
 
 export function addSearch (results) {
-    return { type: ADD_SEARCH, results}
+    return { type: ADD_SEARCH, results: results}
 }
 
 export function addSeasons (seasons) {
-    return { type: ADD_SEASONS, seasons }
+    return { type: ADD_SEASONS, seasons: seasons }
 }
 
 
 
 export function updateMovieStats (stats) {
-    return { type: UPDATE_MOVIE_STATS, stats}
+    return { type: UPDATE_MOVIE_STATS, stats: stats}
 }
 
 export function updateShowStats (stats) {
-    return { type: UPDATE_TVSHOW_STATS, stats}
+    return { type: UPDATE_TVSHOW_STATS, stats: stats}
 }
 
 export function updateBookStats (stats) {
-    return { type: UPDATE_BOOK_STATS, stats}
+    return { type: UPDATE_BOOK_STATS, stats: stats}
 }
 export function updateStats (stats) {
-    return { type: UPDATE_STATS, stats}
+    return { type: UPDATE_STATS, stats: stats}
 
 }
 

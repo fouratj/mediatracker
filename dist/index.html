@@ -8,44 +8,56 @@
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.2/jquery.matchHeight-min.js"></script>
   <style>
       main {
         flex: 1 0 auto;
       }
 
-      html {
-        /*font-family: GillSans, Calibri, Trebuchet, sans-serif;*/
+      #app {
+        padding-left: 100px;
       }
 
-      header, main, footer {
-        padding-left: 0px;
+      body {
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
       }
 
-      #sidenav-overlay {
-        opacity: 0 !important;
-      }
 
-      @media only screen and (max-width : 992px) {
-        header, main, footer {
+
+      @media only screen and (max-width: 992px) {
+        #app {
           padding-left: 0;
         }
+        /*
+        #sidenav-overlay {
+          margin-left: 140px;
+        }
+        */
       }
 
-      p { writing-mode: tb-rl; }
+      .side-nav li{
+          clear: both;
+      }
+
+      
 
       .rotate {
 
           /* Safari */
-          -webkit-transform: rotate(-90deg);
+          padding-top: 45vh;
+          padding-bottom: 50vw;
+          -webkit-transform: rotate(90deg);
 
           /* Firefox */
-          -moz-transform: rotate(-90deg);
+          -moz-transform: rotate(-270deg);
 
           /* IE */
-          -ms-transform: rotate(-90deg);
+          -ms-transform: rotate(-270deg);
 
           /* Opera */
-          -o-transform: rotate(-90deg);
+          -o-transform: rotate(-270deg);
 
           /* Internet Explorer */
           filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
@@ -55,10 +67,7 @@
 </head>
 <body>
 
-  <div id="app" ></div>
+  <div id="app"></div>
 
-
-<script src="https://www.gstatic.com/firebasejs/3.7.5/firebase.js"></script>
-  
 <script type="text/javascript" src="index_bundle.js"></script></body>
 </html>
