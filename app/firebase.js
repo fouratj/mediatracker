@@ -32,6 +32,7 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 var auth = firebase.auth();
+var user = auth.currentUser;
 
 function mediaTracker () {    
     let user = auth.currentUser;
@@ -74,7 +75,7 @@ function mediaTracker () {
             synopsis: current.synopsis,
             title: current.title
         };
-        console.log('movie added')
+        console.log('movie added');
         store.dispatch(addMovie(movie));
     });
 
@@ -162,37 +163,32 @@ function mediaTracker () {
 }
 
 export function addMovieToDB (movie) {
-    let user = auth.currentUser;
     var moviesRef = database.ref( user.uid + 'movies');
     moviesRef.push(movie);
 }
 
 export function delMovieFromDB (movie) {
-    let user = auth.currentUser;
     var movieRef = database.ref( user.uid + 'movies/' + movie.key)
     movieRef.remove();
 }
 
 export function addTVShowToDB (tvshow) {
-    let user = auth.currentUser;
     var tvshowsRef = database.ref( user.uid + 'tvshows');
     tvshowsRef.push(tvshow);
 }
 
 export function delTVShowFromDB (tvshow) {
-    let user = auth.currentUser;
     var tvshowRef = database.ref( user.uid + 'tvshows/' + tvshow.key);
     tvshowRef.remove();
 }
 
 export function addBookToDB (book) {
-    let user = auth.currentUser;
     var booksRef = database.ref( user.uid + 'books');
     booksRef.push(book);
 }
 
 export function delBookFromDB (book) {
-    let user = auth.currentUser;
+    // let user = auth.currentUser;
     var bookRef = database.ref(user.uid + 'books/' + book.key);
     bookRef.remove();
 }
@@ -207,7 +203,7 @@ export function signIn () {
 
 export function signOut () {
     firebase.auth().signOut().then(function() {
-        console.log("Signout Successful")
+        console.log("Signout Successful");
     }, function(error) {
         console.log(error);
     });

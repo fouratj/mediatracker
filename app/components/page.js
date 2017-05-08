@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from './card';
 import Collection from './collection';
+import $ from 'jquery';
+import 'jquery-match-height';
 
 class Button extends React.Component {
     constructor(props) {
@@ -60,6 +62,10 @@ class Page extends React.Component {
                 {items}
             </div>
         )
+    }
+
+    componentDidUpdate () {
+        // $('img').matchHeight();
     }
 
 }
