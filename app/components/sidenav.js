@@ -60,7 +60,6 @@ export default class SideNav extends React.Component {
                                 <div className="collapsible-body teal darken-1">
                                     <ul>
                                         <li><Link to="/movies/cards"><i className="material-icons right">list</i></Link></li>
-                                        <li><Link to="/movies/list"><i className="material-icons right">format_list_numbered</i></Link></li>
                                         <li><Link to="/movies/chart"><i className="material-icons right">show_chart</i></Link></li>
                                         <li><Link to="/"><i className="material-icons right">info</i></Link></li>
                                     </ul>
@@ -74,10 +73,9 @@ export default class SideNav extends React.Component {
                                 <Link to="/tvshows" className="collapsible-header">     
                                     <i className="material-icons right">tv</i><span style={{opacity: '0'}}>|</span> 
                                 </Link>
-                                <div className="collapsible-body teal">
+                                <div className="collapsible-body teal darken-1">
                                     <ul>
                                         <li><Link to="/tvshows/cards"><i className="material-icons right">list</i></Link></li>
-                                        <li><Link to="/tvshows/list"><i className="material-icons right">format_list_numbered</i></Link></li>
                                         <li><Link to="/tvshows/chart"><i className="material-icons right">show_chart</i></Link></li>
                                         <li><Link to="/"><i className="material-icons right">info</i></Link></li>
                                     </ul>
@@ -92,7 +90,7 @@ export default class SideNav extends React.Component {
                                 <Link to="/books" className="collapsible-header">     
                                     <i className="material-icons right">book</i><span style={{opacity: '0'}}>|</span> 
                                 </Link>
-                                <div className="collapsible-body teal">
+                                <div className="collapsible-body teal darken-1">
                                     <ul>
                                         <li><Link to="/books/cards"><i className="material-icons right">list</i></Link></li>
                                         <li><Link to="/books/chart"><i className="material-icons right">show_chart</i></Link></li>
@@ -113,3 +111,6 @@ export default class SideNav extends React.Component {
         )
     }
 }
+
+//<li><Link to="/tvshows/list"><i className="material-icons right">format_list_numbered</i></Link></li>
+//<li><Link to="/movies/list"><i className="material-icons right">format_list_numbered</i></Link></li>
