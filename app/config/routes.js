@@ -17,19 +17,19 @@ export let routes = (
             <Route path='/movies/cards' component={moviesList} />
             <Route path='/movies/list' component={moviesList} />
             <Route path='/movies/chart' components={chartWrapper} />
-            <Route path='/movies/info' components={infoWrapper}/>
+            <Route path='/movies/info' components={infoWrapper} />
 
             <Route path='/tvshows' component={titleWrapper} />
             <Route path='/tvshows/cards' component={tvshowsList} />
             <Route path='/tvshows/list' component={tvshowsList} />
             <Route path='/tvshows/chart' component={chartWrapper} />
-            <Route path='/tvshows/info' />
+            <Route path='/tvshows/info' components={infoWrapper} />
 
             <Route path='/books' component={titleWrapper} />
             <Route path='/books/cards' component={booksList} />
             <Route path='/books/list' component={booksList} />
             <Route path='/books/chart' component={chartWrapper} />
-            <Route path='/books/info' />
+            <Route path='/books/info' components={infoWrapper} />
 
             <Route path='/stats' component={statsList} />
         </Route>
