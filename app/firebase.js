@@ -163,16 +163,19 @@ function mediaTracker () {
 }
 
 export function addMovieToDB (movie) {
-    var moviesRef = database.ref( user.uid + 'movies');
+    let user = auth.currentUser;
+    var moviesRef = database.ref(user.uid + 'movies');
     moviesRef.push(movie);
 }
 
 export function delMovieFromDB (movie) {
+    let user = auth.currentUser;
     var movieRef = database.ref( user.uid + 'movies/' + movie.key)
     movieRef.remove();
 }
 
 export function addTVShowToDB (tvshow) {
+    let user = auth.currentUser;
     var tvshowsRef = database.ref( user.uid + 'tvshows');
     tvshowsRef.push(tvshow);
 }
@@ -183,19 +186,20 @@ export function delTVShowFromDB (tvshow) {
 }
 
 export function addBookToDB (book) {
+    let user = auth.currentUser;
     var booksRef = database.ref( user.uid + 'books');
     booksRef.push(book);
 }
 
 export function delBookFromDB (book) {
-    // let user = auth.currentUser;
+    let user = auth.currentUser;
     var bookRef = database.ref(user.uid + 'books/' + book.key);
     bookRef.remove();
 }
 
 export function signIn () {
     var provider = new firebase.auth.GoogleAuthProvider();
-    firebase.auth().signInWithPopup(provider)
+    firebase.auth().signInWithRedirect(provider)
         .catch(function(error) {
             console.log(error);
         });
@@ -214,5 +218,6 @@ firebase.auth().onAuthStateChanged(function(user) {
     
     if (user) {
         myListener = new mediaTracker();
+        user = auth.currentUser;
     }
 });
