@@ -61,7 +61,7 @@ export default class SideNav extends React.Component {
                                     <ul>
                                         <li><Link to="/movies/cards"><i className="material-icons right">list</i></Link></li>
                                         <li><Link to="/movies/chart"><i className="material-icons right">show_chart</i></Link></li>
-                                        <li><Link to="/"><i className="material-icons right">info</i></Link></li>
+                                        <li><Link to="/movies/info"><i className="material-icons right">info</i></Link></li>
                                     </ul>
                                 </div>
                             </li>
@@ -77,7 +77,7 @@ export default class SideNav extends React.Component {
                                     <ul>
                                         <li><Link to="/tvshows/cards"><i className="material-icons right">list</i></Link></li>
                                         <li><Link to="/tvshows/chart"><i className="material-icons right">show_chart</i></Link></li>
-                                        <li><Link to="/"><i className="material-icons right">info</i></Link></li>
+                                        <li><Link to="/tvshows/info"><i className="material-icons right">info</i></Link></li>
                                     </ul>
                                 </div>
                             </li>
@@ -94,7 +94,7 @@ export default class SideNav extends React.Component {
                                     <ul>
                                         <li><Link to="/books/cards"><i className="material-icons right">list</i></Link></li>
                                         <li><Link to="/books/chart"><i className="material-icons right">show_chart</i></Link></li>
-                                        <li><Link to=""><i className="material-icons right">info</i></Link></li>
+                                        <li><Link to="/books/info"><i className="material-icons right">info</i></Link></li>
                                     </ul>
                                 </div>
                             </li>
