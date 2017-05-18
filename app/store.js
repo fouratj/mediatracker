@@ -257,10 +257,15 @@ export function books (state = [], action) {
         case ADD_BOOK: 
             return [
                 {
-                    title: action.book.title,
-                    poster: action.book.poster,
-                    released: action.book.released,
-                    id: action.book.id
+                key: action.book.key,
+                title: action.book.title,
+                poster: action.book.poster,
+                createdBy: action.book.createdBy,
+                count: action.book.count,
+                id: action.book.id,
+                runtime: action.book.runtime,
+                released: action.book.released,
+                dateAdded: action.book.dateAdded
                 },
                 ...state
             ]
