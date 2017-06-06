@@ -218,7 +218,7 @@ export function movies (state = [], action) {
         case RESET_MOVIES:
             return [];
         default:
-            return state;
+            return [...state];
     }
 }
 
@@ -276,7 +276,7 @@ export function books (state = [], action) {
         case RESET_BOOKS:
             return [];
         default:
-            return state;
+            return [...state];
     }
 }
 

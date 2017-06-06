@@ -3,10 +3,15 @@ import React from 'react';
 export default class Info extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { title: '', data: [], icon: '', descriptor: '' }
+        this.state = { title: '', data: [], icon: '', descriptor: '', count: 0, total: 0 }
     }
 
-    componentDidMount () {
+    shouldComponentUpdate () {
+        console.log('info updated');
+        return true;
+    }
+
+    componentWillMount () {
         let type = this.props.route.path;
         let title = '', data = [], icon = '', descriptor = '';
 
@@ -27,20 +32,25 @@ export default class Info extends React.Component {
             descriptor = 'pages';
         }
 
+        let count = data.length;
+        let total = data
+                        .map(item => ( item.runtime ))
+                        .reduce((pre, curr) => ( pre + curr), 0);
+
         this.setState({
             title: title,
             data: data,
             icon: icon,
-            descriptor: descriptor
+            descriptor: descriptor,
+            count: count,
+            total: total
         });
     }
 
     render () {
-        console.log(this.props);
+        
 
-        let count = this.state.data.length;
-        let total = this.state.data.map(item => ( item.runtime ))
-                                    .reduce((pre, curr) => ( pre + curr), 0);
+        
         
         return (
             <div className="row">
@@ -48,14 +58,14 @@ export default class Info extends React.Component {
                     <ul className="collection with-header">
                         <li className="collection-header"><h4>{this.state.title}</h4></li>
                         <li className="collection-item">
-                            <div>{count} {this.state.icon + 's'}
+                            <div>{this.state.count} {this.state.icon + 's'}
                                 <a href="#!" className="secondary-content">
                                     <i className="material-icons">{this.state.icon}</i>
                                 </a>
                             </div>
                         </li>
                          <li className="collection-item">
-                            <div>{total} {this.state.descriptor}
+                            <div>{this.state.total} {this.state.descriptor}
                                 <a href="#!" className="secondary-content">
                                     <i className="material-icons">{this.state.icon}</i>
                                 </a>
