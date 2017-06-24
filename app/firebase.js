@@ -128,9 +128,10 @@ function mediaTracker () {
 
     // GET STATS
     user.getToken().then(function(idToken) {
-        let movieURI = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getMovieStats';
-        let showURI = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getShowStats';
-        let bookURI = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/getBookStats';
+        let URI = 'https://us-central1-mylifetracker-b6177.cloudfunctions.net/';
+        let movieURI = URI + 'getMovieStats';
+        let showURI = URI + 'getShowStats';
+        let bookURI = URI + 'getBookStats';
 
         $.get(bookURI, { 'target': idToken }, function (data) {
 
