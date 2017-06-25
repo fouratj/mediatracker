@@ -12,7 +12,9 @@ import { store,
         resetStateOnSignOut,
         updateMovieStats,
         updateShowStats,
-        updateBookStats } from './store';
+        updateBookStats 
+    } 
+    from './store';
 
 import { firebaseData } from './config/init';
 
